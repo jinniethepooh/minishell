@@ -12,6 +12,17 @@
 
 #include "libft.h"
 
+int	is_in_str(char c, char *str)
+{
+	if (str && *str)
+	{
+		while (*str)
+			if (c == *str++)
+				return (1);
+	}
+	return (0);
+}
+
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*start;
