@@ -25,25 +25,25 @@ int	is_in_str(char c, char *str)
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*start;
-	char	*end;
 	char	*newstr;
+	int		i;
+	int		j;
+	int		k;
 
-	newstr = ft_strdup(s1);
-	start = newstr - 1;
-	while (*++start)
-		if (!is_in_str(*start, (char *)set))
+	i = -1;
+	while (s1[++i])
+		if (!is_in_str(s1[i], (char *)set))
 			break ;
-	if (!*start)
-	{
-		free(newstr);
+	if (!s1[i])
 		return (ft_strdup(""));
-	}
-	end = start + ft_strlen(start);
-	while (*--end)
-		if (!is_in_str(*end, (char *)set))
+	j = i + ft_strlen(s1 + i);
+	while (s1[--j])
+		if (!is_in_str(s1[j], (char *)set))
 			break ;
-	*++end = 0;
-	ft_memmove(newstr, start, end - start + 1);
+	newstr = malloc((j - i + 2) * sizeof(*newstr));
+	k = 0;
+	while (i <= j)
+		newstr[k++] = s1[i++];
+	newstr[k] = 0;
 	return (newstr);
 }

@@ -27,24 +27,26 @@ typedef struct s_pipex
 	int		n_pipe;
 	int		*fd_end;
 	pid_t	*proc;
-	int		is_heredoc;
-	char	**argv;
-	char	*cmd_path;
-	char	**cmd_args;
 }	t_pipex;
+
+typedef struct s_command
+{
+	char				*cmd_path;  // ex. "/usr/bin/cat"
+	char				**cmd_args; // ex. "cat -e"
+	struct s_command	*next;
+}	t_command;
 
 typedef struct s_shell
 {
-	int		fd_in;
-	int		fd_out;
-	char	cwd[PATH_MAX];
-	char	usr[256];
-	char	*command;
-	char	*prompt;
-	char	**dir;
-	char	**argv;
-	char	**env;
-	t_pipex	*pipex;
+	int			fd_in;
+	int			fd_out;
+	char		cwd[PATH_MAX];
+	char		usr[256];
+	t_command	*command;
+	char		*prompt;
+	char		**dir;
+	char		**env;
+	t_pipex		*pipex;
 }	t_shell;
 
 t_shell	g_var;
