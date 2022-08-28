@@ -1,16 +1,17 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <limits.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
 # include <errno.h>
 # include <fcntl.h>
-# include <signal.h>
 # include <dirent.h>
 # include <curses.h>
-# include <term.h>
+# include <termios.h>
+# include <signal.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <sys/ioctl.h>
