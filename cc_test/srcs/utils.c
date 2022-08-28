@@ -1,61 +1,23 @@
 #include "minishell.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_wcount(const char *s, char c)
 {
-	size_t	len;
+	int	count;
 
-	len = 0;
-	while (s && s[len])
-		++len;
-	return (len);
-}
-
-static int	loop_join(char *src, char *dst)
-{
-	int	i;
-
-	i = 0;
-	while (src && src[i])
+	count = 0;
+	while (*s)
 	{
-		dst[i] = src[i];
-		++i;
+		while (*s == c)
+			++s;
+		if (*s != c && *s)
+			++count;
+		while (*s != c && *s)
+			++s;
 	}
-	return (i);
+	return (count);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+int	ft_isspace(char c)
 {
-	char	*res;
-	int		i;
-
-	if (!s1 && !s2)
-		return (NULL);
-	res = (char *)malloc(ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1);
-	if (!res)
-		return (NULL);
-	i = loop_join((char *)s1, res);
-	i += loop_join((char *)s2, &res[i]);
-	res[i] = '\0';
-	// to free
-	// if (s1)
-	// 	free((void *)s1);
-	return (res);
+	return (c == ' ' || c == '\t' || c == '\v' || c == '\f' || c == '\r');
 }
-
-// TBD
-// char	*ft_strchr(const char *s, int c)
-// {
-// 	int	len;
-// 	int	i;
-
-//     if (!s)
-//         return (NULL);
-// 	len = ft_strlen((char *)s);
-// 	i = -1;
-// 	while (s[++i])
-// 		if (s[i] == (unsigned char)c)
-// 			return ((char *)&s[i]);
-// 	if (i != len - 1 && c == '\0')
-// 		return ((char *)&s[i]);
-// 	return (NULL);
-// }
