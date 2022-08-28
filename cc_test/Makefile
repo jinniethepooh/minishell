@@ -1,18 +1,21 @@
 NAME	= tiny_shell
-SRCS	= srcs/test.c
+SRCS	= srcs/test.c \
+			srcs/utils.c \
+			srcs/ft_split.c
 OBJS	= $(SRCS:.c=.o)
-
 INCS	= ../includes/
-CFLAGS	= gcc -Wall -Werror -Wextra -g
-RLLIB	= readline
 
+LIBRL	= readline
 # consider to make changes
-RLDIR	= /usr/local/
+DIRRL	= /usr/local/
+BINRL	= -l$(LIBRL) -L$(DIRRL)lib -I$(DIRRL)include
+
+CFLAGS	= gcc -Wall -Werror -Wextra -g
 
 all: $(NAME)
 
 $(NAME):
-	@$(CFLAGS) -l$(RLLIB) -L$(RLDIR)lib -I$(RLDIR)include -I $(INCS) $(SRCS) -o $(NAME)
+	@$(CFLAGS) $(BINRL) -I $(INCS) $(SRCS) -o $(NAME)
 	@echo "/// ----- tik tak boom ------ ///"
 
 clean:

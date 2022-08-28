@@ -1,19 +1,9 @@
 #include "minishell.h"
 
-/*
-#include <termios.h>
-#include <signal.h>
-#include <sys/types.h>
-#include <sys/ioctl.h>
-
-#include <unistd.h>
-#include <stdlib.h>
-#include <limits.h>
-#include <stdio.h>
-#include <errno.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-*/
+char	*ft_strchr(const char *s, int c);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	**ft_split(char const *s, char c);
+int     ft_wcount(const char *s, char c);
 
 void    echo_off(void)
 {
@@ -45,10 +35,15 @@ int     main(int argc, char **argv)
 {
         struct sigaction	sact;
         char    test[PATH_MAX];
-        
+        char    **dir;
+        char    *prompt;
+        char    *command;
+        int     cwd;
+
+        command = NULL;
         (void)argc;
         (void)argv;
-        getcwd(test, sizeof(test));
+
         
         sigemptyset(&sact.sa_mask);
         sact.sa_flags = SA_SIGINFO;
@@ -59,11 +54,22 @@ int     main(int argc, char **argv)
         while (1)
         {
             echo_off();
-            if (readline(test) == NULL)        // to handle having sth in the line & suddenly ctrl+D
+            // to have prompt (and separate fn)
+            dir = ft_split(getcwd(test, sizeof(test)), '/');
+            cwd = ft_wcount(test, '/') - 1;
+            prompt = ft_strjoin(ft_strjoin(BCYN"tinyshell "CRESET, dir[cwd]), YEL" $ "CRESET);
+            
+            command = readline(prompt);
+            // printf("command = |%s|\n", command);
+            if (command == NULL)
             {
+                // to have free + exit function
                 printf("bye\n");
+                free(prompt);
+                free(command);
                 exit(EXIT_SUCCESS);
             }
         }
+        free(prompt);
         return (EXIT_SUCCESS);
 }

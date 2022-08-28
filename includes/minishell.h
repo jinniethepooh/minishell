@@ -17,6 +17,7 @@
 # include <sys/ioctl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include "colour.h"
 
 typedef struct s_pipex
 {
@@ -35,6 +36,8 @@ typedef struct s_shell
 	int		fd_out;
 	char	cwd[256];
 	char	usr[256];
+	char	*from_rl;
+	char	*prompt;
 	char	**argv;
 	char	**env;
 	t_pipex	*pipex;
