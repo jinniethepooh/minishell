@@ -32,7 +32,8 @@ typedef struct s_pipex
 typedef struct s_command
 {
 	char				*cmd_path;  // ex. "/usr/bin/cat"
-	char				**cmd_args; // ex. "cat -e"
+									// in set_commad.c
+	char				**cmd_args; // ex. { "cat", "-e" }
 	struct s_command	*next;
 }	t_command;
 
