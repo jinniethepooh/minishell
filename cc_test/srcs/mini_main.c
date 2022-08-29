@@ -5,11 +5,11 @@ static void     get_history(t_shell *shell)
         int     i;
 
         i = 0;
-        while (shell->command[i])
+        while (shell->from_rl[i])
         {
-                if (!ft_isspace(shell->command[i]))
+                if (!ft_isspace(shell->from_rl[i]))
                 {
-                        add_history(shell->command);
+                        add_history(shell->from_rl);
                         return ;
                 }
                 ++i;
@@ -36,6 +36,7 @@ static void    shell_init(t_shell *shell)
         // shell->fd_in = 0;    shall be added
         // shell->fd_out = 0;   shall be added
         shell->prompt = NULL;
+        shell->from_rl = NULL;
         shell->command = NULL;
         shell->dir = NULL;
 }
@@ -48,10 +49,11 @@ int     main(void)
         while (1)
         {
             get_prompt(&shell);
-            shell.command = readline(shell.prompt);
-            if (shell.command == NULL)
+            shell.from_rl = readline(shell.prompt);
+            if (shell.from_rl == NULL)
                 mini_exit(&shell);
             get_history(&shell);
+            get_cmd(&shell);
         }
         free(shell.prompt);
         return (EXIT_SUCCESS);

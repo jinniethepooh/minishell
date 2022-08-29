@@ -32,7 +32,7 @@ typedef struct s_pipex
 typedef struct s_command
 {
 	char				*cmd_path;  // ex. "/usr/bin/cat"
-									// in set_commad.c
+									// in set_command.c
 	char				**cmd_args; // ex. { "cat", "-e" }
 	struct s_command	*next;
 }	t_command;
@@ -44,6 +44,7 @@ typedef struct s_shell
 	char		cwd[PATH_MAX];
 	char		usr[256];
 	t_command	*command;
+	char		*from_rl;
 	char		*prompt;
 	char		**dir;
 	char		**env;
@@ -54,6 +55,8 @@ t_shell	g_var;
 
 int		ft_wcount(const char *s, char c);
 int		ft_isspace(char c);
+int		ft_isspecial(char c);
 void    mini_exit(t_shell *shell);
+void    get_cmd(t_shell *shell);
 
 #endif
