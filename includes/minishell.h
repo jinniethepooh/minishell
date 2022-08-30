@@ -22,14 +22,12 @@
 # include "libft.h"
 # include "mini_signal.h"
 
-/*
 typedef struct s_pipex
 {
 	int		n_pipe;
-	int		*fd_end;
-	pid_t	*proc;
+	int		fd_end[200];
+	pid_t	proc[100];
 }	t_pipex;
-*/
 
 typedef struct s_command
 {
@@ -49,6 +47,7 @@ typedef struct s_shell
 	char		*prompt;
 	char		**dir;
 	char		**env;
+	int			exit_status;
 }	t_shell;
 
 t_shell	g_var;
@@ -71,7 +70,15 @@ int		mini_setenv(char *name, char *val);
 char	*mini_getenv(char *name);
 
 /* mini_exec.c */
-int 	mini_exec(t_command *c);
+int 	mini_exec(t_shell *sh);
+void	child_proc(t_command *c, t_pipex p, int idx);
+int		get_num_cmd(t_shell *sh);
+
+/* mini_exec_utils.c */
+t_pipex	setup_pipe(t_shell *sh);
+void	exec_pipe(t_command *c);
+void	close_pipe(t_pipex p);
+void	wait_pipe(t_pipex p);
 
 /* mini_builtin.c */
 int		is_builtin(char **args);
@@ -85,5 +92,9 @@ int		builtin_export(char **args);
 int		builtin_unset(char **args);
 int		builtin_env();
 int		builtin_exit();
+
+/* mini_free.c */
+void	mini_free(t_shell *sh);
+void	clear_command(t_command **head);
 
 #endif
