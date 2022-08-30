@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int	set_cmd_path(t_command *c)
+char	*set_cmd_path(t_command *c)
 {
 	char	**env_paths;
 	char	*temp;
@@ -18,14 +18,25 @@ int	set_cmd_path(t_command *c)
 		free(c->cmd_path);
 		i++;
 	}
-	free_2d_arr(env_paths);
-	if (!c->cmd_path)
-	{
+	free_2d(env_paths);
+	if (access(c->cmd_path, F_OK) != 0)
 		c->cmd_path = 0;
+	return (c->cmd_path);
+}
+
+int	get_num_cmd(t_shell *sh)
+{
+	t_command	*c;
+	int			n;
+
+	n = 0;
+	c = sh->command;
+	while (c)
+	{
+		n++;
+		c = c->next;
 	}
-	if (c->next)
-		return (set_cmd_path(c->next));
-	return (0);
+	return (n);
 }
 
 /*
@@ -38,6 +49,7 @@ int	main()
 	g_var.command->next->cmd_args = ft_split("ls -al", ' ');
 
 	set_cmd_path(g_var.command);
+	set_cmd_path(g_var.command->next);
 
 	t_command	*cmd = g_var.command;
 	while (cmd)

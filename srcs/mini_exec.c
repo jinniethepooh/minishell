@@ -1,20 +1,5 @@
 #include "minishell.h"
 
-int	get_num_cmd(t_shell *sh)
-{
-	t_command	*c;
-	int			n;
-
-	n = 0;
-	c = sh->command;
-	while (c)
-	{
-		n++;
-		c = c->next;
-	}
-	return (n);
-}
-
 int mini_exec(t_shell *sh)
 {
 	t_command	*c;
@@ -22,7 +7,7 @@ int mini_exec(t_shell *sh)
 	int			i;
 
 	c = sh->command;
-	p = setup_pipe(sh);
+	p = setup_pipe(get_num_cmd(sh) - 1);
 	i = 0;
 	while (c)
 	{

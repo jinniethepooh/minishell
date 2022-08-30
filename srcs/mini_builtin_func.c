@@ -25,7 +25,7 @@ int	builtin_cd(char **args)
 	size_t	len;
 
 	if (chdir(args[1]) < 0)
-		perror("error");
+		perror("chdir");
 	old_wd = mini_getenv("PWD");
 	len = ft_strlen(old_wd);
 	getcwd(cwd, sizeof(cwd));

@@ -72,10 +72,9 @@ char	*mini_getenv(char *name);
 /* mini_exec.c */
 int 	mini_exec(t_shell *sh);
 void	child_proc(t_command *c, t_pipex p, int idx);
-int		get_num_cmd(t_shell *sh);
 
 /* mini_exec_utils.c */
-t_pipex	setup_pipe(t_shell *sh);
+t_pipex	setup_pipe(int n_pipe);
 void	exec_pipe(t_command *c);
 void	close_pipe(t_pipex p);
 void	wait_pipe(t_pipex p);
@@ -87,14 +86,18 @@ int		call_builtin(char **args);
 /* mini_builtin_func.c */
 int		builtin_echo(char **args);
 int		builtin_cd(char **args);
-int		builtin_pwd();
+int		builtin_pwd(void);
 int		builtin_export(char **args);
 int		builtin_unset(char **args);
-int		builtin_env();
-int		builtin_exit();
+int		builtin_env(void);
+int		builtin_exit(void);
 
 /* mini_free.c */
 void	mini_free(t_shell *sh);
 void	clear_command(t_command **head);
+
+/* mini_cmd_utils.c */
+char	*set_cmd_path(t_command *c);
+int		get_num_cmd(t_shell *sh);
 
 #endif

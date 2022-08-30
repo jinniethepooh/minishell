@@ -1,12 +1,11 @@
 #include "minishell.h"
 
-t_pipex	setup_pipe(t_shell *sh)
+t_pipex	setup_pipe(int n_pipe)
 {
 	t_pipex	p;
 	int		i;
 
-	(void)sh;
-	p.n_pipe = get_num_cmd(sh) - 1;
+	p.n_pipe = n_pipe;
 	i = 0;
 	while (i < p.n_pipe)
 	{

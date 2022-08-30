@@ -15,7 +15,8 @@ void	clear_command(t_command **head)
 		return ;
 	cur = *head;
 	*head = cur->next;
-	free(cur->cmd_path);
+	if (cur->cmd_path)
+		free(cur->cmd_path);
 	free_2d(cur->cmd_args);
 	free(cur);
 	clear_command(head);
