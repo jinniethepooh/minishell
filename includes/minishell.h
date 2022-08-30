@@ -22,17 +22,18 @@
 # include "libft.h"
 # include "mini_signal.h"
 
+/*
 typedef struct s_pipex
 {
 	int		n_pipe;
 	int		*fd_end;
 	pid_t	*proc;
 }	t_pipex;
+*/
 
 typedef struct s_command
 {
 	char				*cmd_path;  // ex. "/usr/bin/cat"
-									// in set_command.c
 	char				**cmd_args; // ex. { "cat", "-e" }
 	struct s_command	*next;
 }	t_command;
@@ -48,7 +49,6 @@ typedef struct s_shell
 	char		*prompt;
 	char		**dir;
 	char		**env;
-	t_pipex		*pipex;
 }	t_shell;
 
 t_shell	g_var;
@@ -58,5 +58,32 @@ int		ft_isspace(char c);
 int		ft_isspecial(char c);
 void    mini_exit(t_shell *shell);
 void    get_cmd(t_shell *shell);
+
+/* utils_2d.c */
+int		size_2d(char **arr);
+void	free_2d(char **arr);
+char	**dup_2d(char **src_arr);
+char	**add_to_2d(char **old_arr, char *mem);
+char	**rm_from_2d(char **old_arr, int idx);
+
+/* mini_env.c */
+int		mini_setenv(char *name, char *val);
+char	*mini_getenv(char *name);
+
+/* mini_exec.c */
+int 	mini_exec(t_command *c);
+
+/* mini_builtin.c */
+int		is_builtin(char **args);
+int		call_builtin(char **args);
+
+/* mini_builtin_func.c */
+int		builtin_echo(char **args);
+int		builtin_cd(char **args);
+int		builtin_pwd();
+int		builtin_export(char **args);
+int		builtin_unset(char **args);
+int		builtin_env();
+int		builtin_exit();
 
 #endif
