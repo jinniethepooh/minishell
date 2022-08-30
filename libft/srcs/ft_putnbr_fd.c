@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-void	ft_putstr_fd(char *s, int fd);
+#include "libft.h"
 
 static char	*ft_strrev(char *tab, int len)
 {

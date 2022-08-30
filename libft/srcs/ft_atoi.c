@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isdigit(int c);
+#include "libft.h"
 
 static int	ft_isspace(char c)
 {
