@@ -1,5 +1,6 @@
 NAME	= tiny_shell
 SRCS	= srcs/mini_main.c \
+			srcs/mini_lexer.c \
 			srcs/mini_signal.c \
 			srcs/mini_exit.c \
 			srcs/utils.c
@@ -20,7 +21,7 @@ CFLAGS	= gcc -Wall -Werror -Wextra -g
 all: $(NAME)
 
 $(NAME):
-	@make -C $(DIRFT)
+	@make -C $(DIRFT) --silent
 	@$(CFLAGS) $(BINRL) $(BINFT) -I $(INCS) $(SRCS) -o $(NAME)
 	@echo "/// ----- tik tak boom ------ ///"
 
