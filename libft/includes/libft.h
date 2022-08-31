@@ -12,8 +12,11 @@
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
 # include <unistd.h>
 # include <stdlib.h>
+
+# include "libft_v2.h"
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
