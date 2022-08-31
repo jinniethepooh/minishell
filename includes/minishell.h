@@ -21,6 +21,7 @@
 # include "colour.h"
 # include "libft.h"
 # include "mini_signal.h"
+// # include "mini_pipe.h"
 
 typedef struct s_pipex
 {
@@ -31,6 +32,8 @@ typedef struct s_pipex
 
 typedef struct s_command
 {
+	int					fd_in;
+	int					fd_out;
 	char				*cmd_path;  // ex. "/usr/bin/cat"
 	char				**cmd_args; // ex. { "cat", "-e" }
 	struct s_command	*next;
@@ -38,8 +41,8 @@ typedef struct s_command
 
 typedef struct s_shell
 {
-	int			fd_in;
-	int			fd_out;
+	//int			fd_in;
+	//int			fd_out;
 	char		cwd[PATH_MAX];
 	char		usr[256];
 	t_command	*command;
@@ -58,16 +61,22 @@ int		ft_isspecial(char c);
 void    mini_exit(t_shell *shell);
 void    get_cmd(t_shell *shell);
 
-/* utils_2d.c */
-int		size_2d(char **arr);
-void	free_2d(char **arr);
-char	**dup_2d(char **src_arr);
-char	**add_to_2d(char **old_arr, char *mem);
-char	**rm_from_2d(char **old_arr, int idx);
+/* mini_free.c */
+void	mini_free(t_shell *sh);
+void	clear_command(t_command **head);
+
+/* mini_cmd_utils.c */
+char	*set_cmd_path(t_command *c);
+int		get_num_cmd(t_shell *sh);
 
 /* mini_env.c */
 int		mini_setenv(char *name, char *val);
 char	*mini_getenv(char *name);
+
+/* mini_redir.c */
+void	mini_redir_input(t_command *c, char *mode, char *name);
+void	mini_redir_output(t_command *c, char *mode, char *name);
+t_pipex	mini_heredoc(char *eof);
 
 /* mini_exec.c */
 int 	mini_exec(t_shell *sh);
@@ -81,7 +90,7 @@ void	wait_pipe(t_pipex p);
 
 /* mini_builtin.c */
 int		is_builtin(char **args);
-int		call_builtin(char **args);
+int		call_builtin(t_command *c);
 
 /* mini_builtin_func.c */
 int		builtin_echo(char **args);
@@ -91,13 +100,5 @@ int		builtin_export(char **args);
 int		builtin_unset(char **args);
 int		builtin_env(void);
 int		builtin_exit(void);
-
-/* mini_free.c */
-void	mini_free(t_shell *sh);
-void	clear_command(t_command **head);
-
-/* mini_cmd_utils.c */
-char	*set_cmd_path(t_command *c);
-int		get_num_cmd(t_shell *sh);
 
 #endif
