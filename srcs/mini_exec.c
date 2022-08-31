@@ -22,7 +22,7 @@ int mini_exec(t_shell *sh)
 			child_proc(c, p, i);
 			exit(EXIT_SUCCESS);
 		}
-		call_builtin(c->cmd_args);
+		call_builtin(c);
 		i++;
 		c = c->next;
 	}
@@ -35,22 +35,14 @@ void	child_proc(t_command *c, t_pipex p, int idx)
 {
 	if (!is_builtin(c->cmd_args))
 	{
-		if (idx == 0)
-		{
-			if (dup2(g_var.fd_in, STDIN_FILENO) < 0)
-				return ;
-			dup2(p.fd_end[1], STDOUT_FILENO);
-		}
-		else if (!c->next)
-		{
-			dup2(g_var.fd_out, STDOUT_FILENO);
-			dup2(p.fd_end[idx * 2 - 2], STDIN_FILENO);
-		}
+		if (c->fd_in != STDIN_FILENO || idx == 0)
+			dup2(c->fd_in, STDIN_FILENO);
 		else
-		{
 			dup2(p.fd_end[(idx - 1) * 2], STDIN_FILENO);
+		if (c->fd_out != STDOUT_FILENO || !c->next)
+			dup2(c->fd_out, STDOUT_FILENO);
+		else
 			dup2(p.fd_end[idx * 2 + 1], STDOUT_FILENO);
-		}
 		close_pipe(p);
 		exec_pipe(c);
 	}

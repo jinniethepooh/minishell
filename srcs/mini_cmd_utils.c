@@ -6,21 +6,27 @@ char	*set_cmd_path(t_command *c)
 	char	*temp;
 	int		i;
 
-	i = 0;
-	env_paths = ft_split(getenv("PATH"), ':');
-	while (env_paths[i])
+	if (!c->cmd_args)
+		return (0);
+	if (access(c->cmd_args[0], F_OK) == 0)
+		c->cmd_path = ft_strdup(c->cmd_args[0]);
+	else
 	{
-		temp = ft_strjoin(env_paths[i], "/");
-		c->cmd_path = ft_strjoin(temp, c->cmd_args[0]);
-		free(temp);
-		if (access(c->cmd_path, F_OK) == 0)
-			break ;
-		free(c->cmd_path);
-		i++;
+		i = 0;
+		env_paths = ft_split(getenv("PATH"), ':');
+		while (env_paths[i])
+		{
+			temp = ft_strjoin(env_paths[i], "/");
+			c->cmd_path = ft_strjoin(temp, c->cmd_args[0]);
+			free(temp);
+			if (access(c->cmd_path, F_OK) == 0)
+				break ;
+			free(c->cmd_path);
+			if (!env_paths[++i])
+				c->cmd_path = 0;
+		}
+		free_2d(env_paths);
 	}
-	free_2d(env_paths);
-	if (access(c->cmd_path, F_OK) != 0)
-		c->cmd_path = 0;
 	return (c->cmd_path);
 }
 

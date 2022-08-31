@@ -25,45 +25,45 @@ static void	set_builtin_func(int (**b_func)())
 int	is_builtin(char **args)
 {
 	char	*b_str[7];
-	size_t	len;
 	int		i;
 
-	i = 0;
-	set_builtin_str(b_str);
-	while (i < 7)
+	if (args)
 	{
-		len = ft_strlen(args[0]);
-		if (ft_strlen(b_str[i]) > len)
-			len = ft_strlen(b_str[i]);
-		if (ft_strncmp(args[0], b_str[i], len) == 0)
-			return (1);
-		i++;
+		i = 0;
+		set_builtin_str(b_str);
+		while (i < 7)
+		{
+			if (ft_strcmp(args[0], b_str[i]) == 0)
+				return (1);
+			i++;
+		}
 	}
 	return (0);
 }
 
-int	call_builtin(char **args)
+int	call_builtin(t_command *c)
 {
 	char	*b_str[7];
 	int		(*b_func[7])();
-	size_t	len;
 	int		i;
 
-	i = 0;
-	set_builtin_str(b_str);
-	set_builtin_func(b_func);
-	while (i < 7)
+	if (c->cmd_args)
 	{
-		len = ft_strlen(args[0]);
-		if (ft_strlen(b_str[i]) > len)
-			len = ft_strlen(b_str[i]);
-		if (ft_strncmp(args[0], b_str[i], len) == 0)
+		i = 0;
+		set_builtin_str(b_str);
+		set_builtin_func(b_func);
+		while (i < 7)
 		{
-			//printf("called %s\n", b_str[i]);
-			(b_func[i])(args);
-			return (1);
+			if (ft_strcmp(c->cmd_args[0], b_str[i]) == 0)
+			{
+				//printf("called %s\n", b_str[i]);
+				//dup2(c->fd_in, STDIN_FILENO);
+				//dup2(c->fd_out, STDOUT_FILENO);
+				(b_func[i])(c->cmd_args);
+				return (1);
+			}
+			i++;
 		}
-		i++;
 	}
 	return (0);
 }

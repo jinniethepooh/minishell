@@ -19,11 +19,12 @@ void	exec_pipe(t_command *c)
 {
 	if (!c->cmd_path)
 	{
-		ft_putstr_fd("command not found\n", STDERR_FILENO);
+		ft_putstr_fd(c->cmd_args[0], STDERR_FILENO);
+		ft_putstr_fd(": command not found\n", STDERR_FILENO);
 		exit(EXIT_FAILURE);
 	}
 	if (execve(c->cmd_path, c->cmd_args, g_var.env) < 0)
-		perror("execve");
+		perror(c->cmd_path);
 }
 
 void	close_pipe(t_pipex p)
