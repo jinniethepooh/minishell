@@ -1,9 +1,10 @@
 #include "minishell.h"
 
-void    mini_exit(t_shell *shell)
+void    mini_exit(void)
 {
         printf("... exiting hell, "BRED"to a deeper!\n"RES);
-        free(shell->prompt);
-        free(shell->command);
+        free(g_var.prompt);
+        free(g_var.from_rl);
+        mini_free(&g_var);
         exit(EXIT_SUCCESS);
 }

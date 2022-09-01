@@ -57,11 +57,10 @@ t_shell	g_var;
 
 int		ft_wcount(const char *s, char c);
 int		ft_isspace(char c);
-int		ft_isspecial(char c);
-void    mini_exit(t_shell *shell);
-void    get_cmd(t_shell *shell);
+void    get_cmd(void);
 
 /* mini_free.c */
+void    mini_exit(void);
 void	mini_free(t_shell *sh);
 void	clear_command(t_command **head);
 
