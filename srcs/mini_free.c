@@ -15,6 +15,10 @@ void	clear_command(t_command **head)
 		return ;
 	cur = *head;
 	*head = cur->next;
+	if (cur->fd_in != STDIN_FILENO)
+		close(cur->fd_in);
+	if (cur->fd_out != STDOUT_FILENO)
+		close(cur->fd_out);
 	if (cur->cmd_path)
 		free(cur->cmd_path);
 	free_2d(cur->cmd_args);

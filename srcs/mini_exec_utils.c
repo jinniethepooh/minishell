@@ -17,14 +17,21 @@ t_pipex	setup_pipe(int n_pipe)
 
 void	exec_pipe(t_command *c)
 {
-	if (!c->cmd_path)
+	if (!is_builtin(c->cmd_args))
 	{
-		ft_putstr_fd(c->cmd_args[0], STDERR_FILENO);
-		ft_putstr_fd(": command not found\n", STDERR_FILENO);
-		exit(EXIT_FAILURE);
+		if (!c->cmd_path)
+		{
+			ft_putstr_fd(c->cmd_args[0], STDERR_FILENO);
+			ft_putstr_fd(": command not found\n", STDERR_FILENO);
+			exit(127);
+		}
+		if (execve(c->cmd_path, c->cmd_args, g_var.env) < 0)
+			perror("execve");
 	}
-	if (execve(c->cmd_path, c->cmd_args, g_var.env) < 0)
-		perror(c->cmd_path);
+	else
+	{
+		call_builtin(c);
+	}
 }
 
 void	close_pipe(t_pipex p)
@@ -39,14 +46,16 @@ void	close_pipe(t_pipex p)
 	}
 }
 
-void	wait_pipe(t_pipex p)
+int	wait_pipe(t_pipex p)
 {
+	int	status;
 	int	i;
 
 	i = 0;
 	while (i < p.n_pipe + 1)
 	{
-		if (waitpid(p.proc[i++], 0, 0) < 0)
+		if (waitpid(p.proc[i++], &status, 0) < 0)
 			perror("waitpid");
 	}
+	return (WEXITSTATUS(status));
 }

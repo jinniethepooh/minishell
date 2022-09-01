@@ -2,14 +2,19 @@
 
 int	builtin_echo(char **args)
 {
-	if (ft_strncmp(args[1], "-n", 2) == 0)
-		print_2d(args + 2, ' ');
-	else
+	if (args[1])
 	{
-		print_2d(args + 1, ' ');
-		printf("\n");
+		if (ft_strncmp(args[1], "-n", 2) == 0)
+			print_2d(args + 2, ' ');
+		else
+		{
+			print_2d(args + 1, ' ');
+			printf("\n");
+		}
 	}
-	return (0);
+	else
+		printf("\n");
+	return (EXIT_SUCCESS);
 }
 
 int	builtin_cd(char **args)
@@ -18,14 +23,17 @@ int	builtin_cd(char **args)
 	char	*old_wd;
 
 	if (chdir(args[1]) < 0)
-		perror("chdir");
+	{
+		perror("cd");
+		exit(EXIT_FAILURE);
+	}
 	old_wd = mini_getenv("PWD");
 	getcwd(cwd, sizeof(cwd));
 	if (old_wd)
 		if (ft_strcmp(cwd, old_wd) != 0)
 			mini_setenv("OLDPWD", old_wd);
 	mini_setenv("PWD", cwd);
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int	builtin_pwd(void)
@@ -34,13 +42,13 @@ int	builtin_pwd(void)
 
 	getcwd(cwd, sizeof(cwd));
 	printf("%s\n", cwd);
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int	builtin_export(char **args)
 {
 	mini_setenv(args[1], "test");
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int	builtin_unset(char **args)
@@ -56,18 +64,18 @@ int	builtin_unset(char **args)
 	free(temp);
 	if (g_var.env[i])
 		rm_from_2d(&g_var.env, i);
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int	builtin_env(void)
 {
 	print_2d(g_var.env, '\n');
 	printf("\n");
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int	builtin_exit(void)
 {
 	exit(EXIT_SUCCESS);
-	return (0);
+	return (EXIT_SUCCESS);
 }

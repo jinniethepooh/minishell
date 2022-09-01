@@ -14,7 +14,7 @@ void	mini_redir_input(t_command *c, char *mode, char *name)
 	if (ft_strcmp(mode, "<") == 0)
 		c->fd_in = open(name, O_RDONLY);
 	if (c->fd_in < 0)
-		perror("open");
+		perror(name);
 }
 
 void	mini_redir_output(t_command *c, char *mode, char *name)
@@ -24,7 +24,7 @@ void	mini_redir_output(t_command *c, char *mode, char *name)
 	else if (ft_strcmp(mode, ">>") == 0)
 		c->fd_out = open(name, O_CREAT | O_RDWR | O_APPEND, 0644);
 	if (c->fd_out < 0)
-		perror("open");
+		perror(name);
 }
 
 t_pipex	mini_heredoc(char *eof)

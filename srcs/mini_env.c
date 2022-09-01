@@ -16,7 +16,7 @@ int	mini_setenv(char *name, char *val)
 		g_var.env[i] = ft_strjoin(temp, val);
 	}
 	else
-		add_to_2d(&g_var.env, ft_strjoin(temp, val), i);
+		add_to_2d(&g_var.env, ft_strjoin(temp, val), i - 1);
 	free(temp);
 	return (0);
 }

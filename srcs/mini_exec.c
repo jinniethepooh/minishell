@@ -1,49 +1,54 @@
 #include "minishell.h"
 
+static int	fork_proc(t_command *cmd, t_pipex px, int idx);
+static void	child_proc(t_command *cmd, t_pipex px, int idx);
+
 int mini_exec(t_shell *sh)
 {
-	t_command	*c;
-	t_pipex		p;
-	int			i;
+	t_command	*cmd;
+	t_pipex		px;
 
-	c = sh->command;
-	p = setup_pipe(get_num_cmd(sh) - 1);
-	i = 0;
-	while (c)
-	{
-		p.proc[i] = fork();
-		if (p.proc[i] < 0)
-		{
-			perror("fork");
-			exit(EXIT_FAILURE);
-		}
-		else if (p.proc[i] == 0)
-		{
-			child_proc(c, p, i);
-			exit(EXIT_SUCCESS);
-		}
-		call_builtin(c);
-		i++;
-		c = c->next;
-	}
-	close_pipe(p);
-	wait_pipe(p);
-	return (0);
+	cmd = sh->command;
+	if (get_num_cmd(sh) == 1 && is_builtin(cmd->cmd_args))
+		return (call_builtin(cmd));
+	px = setup_pipe(get_num_cmd(sh) - 1);
+	return (fork_proc(cmd, px, 0));
 }
 
-void	child_proc(t_command *c, t_pipex p, int idx)
+static int	fork_proc(t_command *cmd, t_pipex px, int idx)
 {
-	if (!is_builtin(c->cmd_args))
+	if (!cmd)
 	{
-		if (c->fd_in != STDIN_FILENO || idx == 0)
-			dup2(c->fd_in, STDIN_FILENO);
-		else
-			dup2(p.fd_end[(idx - 1) * 2], STDIN_FILENO);
-		if (c->fd_out != STDOUT_FILENO || !c->next)
-			dup2(c->fd_out, STDOUT_FILENO);
-		else
-			dup2(p.fd_end[idx * 2 + 1], STDOUT_FILENO);
-		close_pipe(p);
-		exec_pipe(c);
+		close_pipe(px);
+		return (wait_pipe(px));
 	}
+	px.proc[idx] = fork();
+	if (px.proc[idx] < 0)
+	{
+		perror("fork");
+		exit(EXIT_FAILURE);
+	}
+	else if (px.proc[idx] == 0)
+	{
+		child_proc(cmd, px, idx);
+		exit(EXIT_SUCCESS);
+	}
+	return (fork_proc(cmd->next, px, idx + 1));
+}
+
+static void	child_proc(t_command *cmd, t_pipex px, int idx)
+{
+	if (cmd->fd_in < 0 || cmd->fd_out < 0)
+		exit(EXIT_FAILURE);
+	if (cmd->fd_in != STDIN_FILENO || idx == 0)
+		dup2(cmd->fd_in, STDIN_FILENO);
+	else
+		dup2(px.fd_end[(idx - 1) * 2], STDIN_FILENO);
+	if (cmd->fd_out != STDOUT_FILENO || !cmd->next)
+		dup2(cmd->fd_out, STDOUT_FILENO);
+	else
+		dup2(px.fd_end[idx * 2 + 1], STDOUT_FILENO);
+	close_pipe(px);
+	cmd->cmd_path = set_cmd_path(cmd);
+	exec_pipe(cmd);
 }

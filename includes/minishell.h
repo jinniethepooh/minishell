@@ -80,13 +80,12 @@ t_pipex	mini_heredoc(char *eof);
 
 /* mini_exec.c */
 int 	mini_exec(t_shell *sh);
-void	child_proc(t_command *c, t_pipex p, int idx);
 
 /* mini_exec_utils.c */
 t_pipex	setup_pipe(int n_pipe);
 void	exec_pipe(t_command *c);
 void	close_pipe(t_pipex p);
-void	wait_pipe(t_pipex p);
+int		wait_pipe(t_pipex p);
 
 /* mini_builtin.c */
 int		is_builtin(char **args);
