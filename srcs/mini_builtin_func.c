@@ -21,8 +21,12 @@ int	builtin_cd(char **args)
 {
 	char	cwd[256];
 	char	*old_wd;
+	char	*target;
 
-	if (chdir(args[1]) < 0)
+	target = args[1];
+	if (!target)
+		target = "..";
+	if (chdir(target) < 0)
 	{
 		perror("cd");
 		exit(EXIT_FAILURE);
