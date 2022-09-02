@@ -3,7 +3,7 @@ NAME = minishell
 SRC_DIR = srcs/
 OBJ_DIR = objs/
 
-SRC_FILE = mini_cmd_utils mini_exec mini_exec_utils mini_free mini_env \
+SRC_FILE = mini_cmd_utils mini_exec mini_exec_utils mini_env \
 	mini_builtin mini_builtin_func mini_redir \
 	mini_lexer mini_signal mini_exit utils \
 	mini_main

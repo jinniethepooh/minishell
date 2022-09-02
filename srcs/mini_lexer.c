@@ -24,7 +24,7 @@ void    get_cmd(void)
             {
                 malloc_cmd(cmd);
                 (*cmd)->cmd_args = ft_split(tmp[i], ' ');
-                (*cmd)->cmd_path = set_cmd_path(*cmd);
+                (*cmd)->cmd_path = NULL;
                 cmd = &(*cmd)->next;
                 ++i;
             }

@@ -53,7 +53,7 @@ int     main(int argc, char **argv, char **env)
                         mini_exit();
                 get_history();
                 get_cmd();
-                mini_exec(&g_var);
+                g_var.exit_status = mini_exec(&g_var);
         }
         mini_exit();
         return (EXIT_SUCCESS);

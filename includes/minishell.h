@@ -21,7 +21,6 @@
 # include "colour.h"
 # include "libft.h"
 # include "mini_signal.h"
-// # include "mini_pipe.h"
 
 typedef struct s_pipex
 {
@@ -34,15 +33,13 @@ typedef struct s_command
 {
 	int					fd_in;
 	int					fd_out;
-	char				*cmd_path;  // ex. "/usr/bin/cat"
-	char				**cmd_args; // ex. { "cat", "-e" }
+	char				*cmd_path;
+	char				**cmd_args;
 	struct s_command	*next;
 }	t_command;
 
 typedef struct s_shell
 {
-	//int			fd_in;
-	//int			fd_out;
 	char		cwd[PATH_MAX];
 	char		usr[256];
 	t_command	*command;
@@ -59,9 +56,8 @@ int		ft_wcount(const char *s, char c);
 int		ft_isspace(char c);
 void    get_cmd(void);
 
-/* mini_free.c */
+/* mini_exit.c */
 void    mini_exit(void);
-void	mini_free(t_shell *sh);
 void	clear_command(t_command **head);
 
 /* mini_cmd_utils.c */
