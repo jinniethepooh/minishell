@@ -52,8 +52,11 @@ typedef struct s_shell
 
 t_shell	g_var;
 
+/* validator */
 int		ft_wcount(const char *s, char c);
 int		ft_isspace(char c);
+int		ft_is_valid_quote(void);
+
 void    get_cmd(void);
 
 /* mini_exit.c */

@@ -1,12 +1,30 @@
 #include "minishell.h"
 
-void     malloc_cmd(t_command **cmd)
+// static void     redir_check_cmd(t_command **cmd)
+// {
+//         int i;
+
+//         i = 0;
+//         while ((*cmd)->cmd_args[i])
+//         {
+//             if (!ft_strcmp((*cmd)->cmd_args[i], ">"))
+//                 mini_redir_output((*cmd), ">", )
+
+//             ++i;
+//         }
+// }
+
+static void     manage_cmd(t_command **cmd, char *raw_cmd)
 {
         *cmd = malloc(sizeof(**cmd));
         if (!*cmd)
             mini_exit();
         (*cmd)->fd_in = STDIN_FILENO;
         (*cmd)->fd_out = STDOUT_FILENO;
+        // to rebuilt ft_splt
+        (*cmd)->cmd_args = ft_split(raw_cmd, ' ');
+        (*cmd)->cmd_path = NULL;
+        // redir_check_cmd(cmd);
 }
 
 void    get_cmd(void)
@@ -22,9 +40,7 @@ void    get_cmd(void)
             tmp = ft_split(g_var.from_rl, '|');
             while (tmp[i])
             {
-                malloc_cmd(cmd);
-                (*cmd)->cmd_args = ft_split(tmp[i], ' ');
-                (*cmd)->cmd_path = NULL;
+                manage_cmd(cmd, tmp[i]);
                 cmd = &(*cmd)->next;
                 ++i;
             }

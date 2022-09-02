@@ -52,8 +52,11 @@ int     main(int argc, char **argv, char **env)
                 if (g_var.from_rl == NULL)
                         mini_exit();
                 get_history();
-                get_cmd();
-                g_var.exit_status = mini_exec(&g_var);
+                if (!ft_is_valid_quote())
+                {
+                        get_cmd();
+                        g_var.exit_status = mini_exec(&g_var);
+                }
         }
         mini_exit();
         return (EXIT_SUCCESS);
