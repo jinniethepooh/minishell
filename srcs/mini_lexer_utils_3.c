@@ -1,5 +1,7 @@
 #include "minishell.h"
 
+char    **cmd_cleaner(char **arr);
+
 static int  ft_piece_loop(char *s, char c)
 {
     int i;
@@ -75,6 +77,6 @@ char	**cmd_split(char const *s, char c)
 	}
 	arr[i] = 0;
 	free(cpy);
-    // add fn to translate expander info
-	return (arr);
+    return(cmd_cleaner(arr));
+	// return (arr);
 }
