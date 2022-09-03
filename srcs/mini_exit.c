@@ -3,8 +3,9 @@
 void    mini_exit(void)
 {
         printf("... exiting hell, "BRED"to a deeper!\n"RES);
-        free(g_var.prompt);
+        //free(g_var.prompt);
         free(g_var.from_rl);
+        free(g_var.usr);
         free_2d(g_var.env);
         clear_command(&g_var.command);
         exit(EXIT_SUCCESS);

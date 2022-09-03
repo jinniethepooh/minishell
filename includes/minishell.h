@@ -41,12 +41,12 @@ typedef struct s_command
 
 typedef struct s_shell
 {
-	char		cwd[PATH_MAX];
-	char		usr[256];
+	//char		cwd[256];
+	char		*usr;
 	t_command	*command;
 	char		*from_rl;
-	char		*prompt;
-	char		**dir;
+	//char		*prompt;
+	//char		**dir;
 	char		**env;
 	int			exit_status;
 }	t_shell;

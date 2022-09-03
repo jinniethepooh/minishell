@@ -1,15 +1,5 @@
 #include "minishell.h"
 
-static int  get_arr_size(char **arr)
-{
-    int sz;
-
-    sz = 0;
-    while (arr[sz])
-        ++sz;
-    return (sz);
-}
-
 static void *cmd_cleaner_var(char *src)
 {
     char    *tmp;
@@ -53,7 +43,7 @@ char    **cmd_cleaner(char **arr)
     char    **clean;
     int     i;
     i = 0;
-    clean = (char **)malloc((get_arr_size(arr) + 1) * sizeof(char *));
+    clean = (char **)malloc((size_2d(arr) + 1) * sizeof(char *));
     while (arr[i])
     {
         clean[i] = cmd_cleaner_loop(arr[i]);

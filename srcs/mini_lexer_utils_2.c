@@ -4,20 +4,20 @@
 
 int  ft_loop_until(const char *s, char c, int flag)
 {
-    int len;
+	int	len;
 
-    len = 0;
-    if (flag)
-    {
-        while (s[len] && s[len] == c)
-            ++len;
-    }
-    else
-    {
-        while (s[len] && s[len] != c)
-            ++len;
-    }
-    return (len);
+	len = 0;
+	if (flag)
+	{
+		while (s[len] && s[len] == c)
+			++len;
+	}
+	else
+	{
+		while (s[len] && s[len] != c)
+			++len;
+	}
+	return (len);
 }
 
 static int quotes_checker(void)
@@ -27,13 +27,13 @@ static int quotes_checker(void)
 
 	i = 0;
 	curr_q = 0;
-    while (g_var.from_rl[i] && !ft_isquotes(g_var.from_rl[i]))
-        ++i;
+	while (g_var.from_rl[i] && !ft_isquotes(g_var.from_rl[i]))
+		++i;
 	while (g_var.from_rl[i])
 	{
-        if (ft_isquotes(g_var.from_rl[i]))
-            curr_q = g_var.from_rl[i++];
-        i += ft_loop_until(&g_var.from_rl[i], curr_q, 0);
+		if (ft_isquotes(g_var.from_rl[i]))
+			curr_q = g_var.from_rl[i++];
+		i += ft_loop_until(&g_var.from_rl[i], curr_q, 0);
 		if (g_var.from_rl[i] == curr_q)
 			curr_q = 0;
 		if (g_var.from_rl[i])
