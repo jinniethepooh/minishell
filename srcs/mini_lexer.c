@@ -14,8 +14,6 @@
 //         }
 // }
 
-char	**pipe_split(char const *s, char c);
-
 static void     manage_cmd(t_command **cmd, char *raw_cmd)
 {
         *cmd = malloc(sizeof(**cmd));
@@ -36,10 +34,13 @@ void    get_cmd(void)
         int i;
 
         i = 0;
+        // int j = -1;
         if (g_var.from_rl)
         {
             cmd = &g_var.command;
             tmp = pipe_split(g_var.from_rl, '|');
+            // while (tmp[++j])
+            //     printf("%s\n", tmp[j]);
             while (tmp[i])
             {
                 manage_cmd(cmd, tmp[i]);

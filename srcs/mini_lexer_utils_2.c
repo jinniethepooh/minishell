@@ -1,5 +1,7 @@
 #include "minishell.h"
 
+// detect var from env
+
 int  ft_loop_quotes(const char *s, char q)
 {
     int len;
@@ -19,10 +21,10 @@ static int quotes_checker(void)
 	curr_q = 0;
     while (g_var.from_rl[i] && !ft_isquotes(g_var.from_rl[i]))
         ++i;
-    if (ft_isquotes(g_var.from_rl[i]))
-        curr_q = g_var.from_rl[i++];
 	while (g_var.from_rl[i])
 	{
+        if (ft_isquotes(g_var.from_rl[i]))
+            curr_q = g_var.from_rl[i++];
         i += ft_loop_quotes(&g_var.from_rl[i], curr_q);
 		if (g_var.from_rl[i] == curr_q)
 			curr_q = 0;
@@ -37,7 +39,7 @@ int	ft_isvalid_quotes(void)
 	if (quotes_checker())
 	{
 		printf("tinyshell: "RED"invaid quotes\n");
-		return (1);
+		return (0);
 	}
-	return (0);
+	return (1);
 }

@@ -2,6 +2,7 @@
 
 // split str regarding ' / "
 // split |  >> done
+// clean from pipe_split > concern 
 // split ' '
 
 static int	ft_strlen_untilc(const char *s, char c)
