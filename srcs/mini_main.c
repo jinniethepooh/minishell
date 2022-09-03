@@ -17,7 +17,7 @@ static void     get_history(void)
 }
 
 /*
-static void     get_prompt(void)
+void     get_prompt(void)
 {
 	int     cwd_count;
 	int     i;
@@ -32,31 +32,29 @@ static void     get_prompt(void)
 }
 */
 
-static void     put_prompt(t_shell *sh)
+void     set_prompt(t_shell *sh)
 {
 	char	*temp;
 	char	*cwd;
 
-	cwd = malloc(256);
-	getcwd(cwd, 256);
+	cwd = malloc(256 * sizeof(*cwd));
+        *cwd = ':';
+	getcwd(cwd + 1, 255);
 	temp = mini_getenv("HOME");
 	if (temp)
 	{
-		if (ft_strncmp(cwd, temp, ft_strlen(temp)) == 0)
+		if (ft_strncmp(cwd + 1, temp, ft_strlen(temp)) == 0)
 		{
                         // to do -> ft_strstr
-			temp = ft_strjoin("~", strstr(cwd, temp) + ft_strlen(temp));
+			temp = ft_strjoin(":~", strstr(cwd + 1, temp) + ft_strlen(temp));
 			free(cwd);
 			cwd = temp;
 		}
 	}
-        ft_putstr_fd(BCYN, STDOUT_FILENO);
-        ft_putstr_fd(sh->usr, STDOUT_FILENO);
-        ft_putstr_fd(RES":", STDOUT_FILENO);
-        ft_putstr_fd(YEL, STDOUT_FILENO);
-        ft_putstr_fd(cwd, STDOUT_FILENO);
-        ft_putstr_fd(RES"$ ", STDOUT_FILENO);
-        free(cwd);
+        temp = ft_strjoin(sh->usr, cwd);
+	sh->prompt = ft_strjoin(temp, "$ ");
+	free(cwd);
+	free(temp);
 }
 
 static void    shell_init(int argc, char **argv, char **env)
@@ -68,7 +66,7 @@ static void    shell_init(int argc, char **argv, char **env)
 	g_var.usr = ft_strdup(mini_getenv("USER"));
 	g_var.from_rl = NULL;
 	g_var.command = NULL;
-	//g_var.prompt = NULL;
+	g_var.prompt = NULL;
 	//g_var.dir = NULL;
 }
 
@@ -77,10 +75,10 @@ int     main(int argc, char **argv, char **env)
 	shell_init(argc, argv, env);
 	while (1)
 	{
-		put_prompt(&g_var);
-		g_var.from_rl = readline("");
+		set_prompt(&g_var);
+		//g_var.from_rl = readline("");
 		//get_prompt();
-		//g_var.from_rl = readline(g_var.prompt);
+		g_var.from_rl = readline(g_var.prompt);
 		if (g_var.from_rl == NULL)
 			mini_exit();
 		get_history();

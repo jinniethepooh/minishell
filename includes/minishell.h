@@ -41,11 +41,11 @@ typedef struct s_command
 
 typedef struct s_shell
 {
-	//char		cwd[256];
 	char		*usr;
+	char		*prompt;
 	t_command	*command;
 	char		*from_rl;
-	//char		*prompt;
+	//char		cwd[256];
 	//char		**dir;
 	char		**env;
 	int			exit_status;

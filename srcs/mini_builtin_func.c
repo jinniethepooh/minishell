@@ -29,7 +29,7 @@ int	builtin_cd(char **args)
 	if (chdir(target) < 0)
 	{
 		perror("cd");
-		exit(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	}
 	old_wd = mini_getenv("PWD");
 	getcwd(cwd, sizeof(cwd));
@@ -80,6 +80,6 @@ int	builtin_env(void)
 
 int	builtin_exit(void)
 {
-	exit(EXIT_SUCCESS);
+	mini_exit();
 	return (EXIT_SUCCESS);
 }
