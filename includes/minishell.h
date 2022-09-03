@@ -54,8 +54,10 @@ t_shell	g_var;
 
 /* validator */
 int		ft_wcount(const char *s, char c);
+int 	ft_loop_quotes(const char *s, char q);
 int		ft_isspace(char c);
-int		ft_is_valid_quote(void);
+int		ft_isquotes(char c);
+int		ft_isvalid_quotes(void);
 
 void    get_cmd(void);
 
