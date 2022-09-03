@@ -1,6 +1,9 @@
 #include "minishell.h"
 
-char    **cmd_cleaner(char **arr);
+static int  ft_is_skipped(char c, char delim)
+{
+    return (c == delim || c == '$' || ft_isredir(c) || ft_isquotes(c) || c == 0);
+}
 
 static int  ft_piece_loop(char *s, char c)
 {
@@ -11,7 +14,9 @@ static int  ft_piece_loop(char *s, char c)
         return (ft_loop_until(&s[i + 1], s[i], 0) + 2);
     if (ft_isredir(s[i]))
         return (ft_loop_until(&s[i], s[i], 1));
-    while (s[i] && s[i] != c && !ft_isredir(s[i]) && !ft_isquotes(s[i]))
+    if (s[i] == '$')
+        i++;
+    while (s[i] && !ft_is_skipped(s[i], c))
         i++;
     return (i);
 }
@@ -23,7 +28,7 @@ static int	ft_piece(char *s, char c)
 
 	piece = 0;
     i = ft_loop_until(s, c, 1);
-	while (s[i])
+  	while (s[i])
 	{
         if (s[i] != c)
         {
@@ -78,5 +83,4 @@ char	**cmd_split(char const *s, char c)
 	arr[i] = 0;
 	free(cpy);
     return(cmd_cleaner(arr));
-	// return (arr);
 }

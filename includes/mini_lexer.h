@@ -7,7 +7,7 @@
 /* mini_lexer_utils_2 - quote handler */
 int 	ft_loop_until(const char *s, char c, int flag);
 int		ft_isvalid_quotes(void);
-void    clean_pipe_split(char **tmp);
+char    **cmd_cleaner(char **arr);
 
 /* mini_lexer_utils */
 char	**pipe_split(char const *s, char c);
