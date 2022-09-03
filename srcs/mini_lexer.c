@@ -16,9 +16,10 @@
 
 static void     manage_cmd(t_command **cmd, char *raw_cmd)
 {
+        clear_command(cmd);
         *cmd = malloc(sizeof(**cmd));
         if (!*cmd)
-            mini_exit();
+            mini_exit(&g_var);
         (*cmd)->fd_in = STDIN_FILENO;
         (*cmd)->fd_out = STDOUT_FILENO;
         (*cmd)->cmd_args = cmd_split(raw_cmd, ' ');

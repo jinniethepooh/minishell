@@ -80,6 +80,6 @@ int	builtin_env(void)
 
 int	builtin_exit(void)
 {
-	mini_exit();
+	mini_exit(&g_var);
 	return (EXIT_SUCCESS);
 }

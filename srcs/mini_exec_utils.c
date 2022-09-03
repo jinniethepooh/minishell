@@ -30,7 +30,7 @@ void	exec_pipe(t_command *c)
 	}
 	else
 	{
-		call_builtin(c);
+		exit(call_builtin(c));
 	}
 }
 

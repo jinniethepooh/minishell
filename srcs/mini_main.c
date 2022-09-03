@@ -99,15 +99,17 @@ int     main(int argc, char **argv, char **env)
 		//get_prompt();
 		g_var.from_rl = readline(g_var.prompt);
 		if (g_var.from_rl == NULL)
-			mini_exit();
+			mini_exit(&g_var);
 		get_history();
 		if (ft_isvalid_quotes())
 		{
 			get_cmd();
 			g_var.exit_status = mini_exec(&g_var);
 		}
+                free(g_var.prompt);
+                free(g_var.from_rl);
 	}
-	mini_exit();
+	mini_exit(&g_var);
 	return (EXIT_SUCCESS);
 }
 
