@@ -27,19 +27,7 @@ int	ft_isquotes(char c)
 	return (c == '\'' || c == '"');
 }
 
-// int	ft_isspecial(char c)
-// {
-// 	if (c == '-')
-// 		return ('-');
-// 	// if (c == '\\')
-// 	// 	return ('\\');
-// 	// if (c == '/')
-// 	// 	return ('s');
-// 	if (c == '>')
-// 		return ('>');
-// 	if (c == '<')
-// 		return ('<');
-// 	if (c == '|')
-// 		return ('|');
-// 	return (ft_isspace(c));
-// }
+int	ft_isredir(char c)
+{
+	return (c == '<' || c == '>');
+}

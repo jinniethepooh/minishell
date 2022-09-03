@@ -57,6 +57,7 @@ t_shell	g_var;
 int		ft_wcount(const char *s, char c);
 int		ft_isspace(char c);
 int		ft_isquotes(char c);
+int		ft_isredir(char c);
 
 /* mini_exit.c */
 void    mini_exit(void);
