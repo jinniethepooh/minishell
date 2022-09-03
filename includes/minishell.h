@@ -21,6 +21,7 @@
 # include "colour.h"
 # include "libft.h"
 # include "mini_signal.h"
+# include "mini_lexer.h"
 
 typedef struct s_pipex
 {
@@ -54,12 +55,8 @@ t_shell	g_var;
 
 /* validator */
 int		ft_wcount(const char *s, char c);
-int 	ft_loop_quotes(const char *s, char q);
 int		ft_isspace(char c);
 int		ft_isquotes(char c);
-int		ft_isvalid_quotes(void);
-
-void    get_cmd(void);
 
 /* mini_exit.c */
 void    mini_exit(void);

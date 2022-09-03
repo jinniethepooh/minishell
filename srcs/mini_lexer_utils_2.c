@@ -17,16 +17,13 @@ static int quotes_checker(void)
 
 	i = 0;
 	curr_q = 0;
+    while (g_var.from_rl[i] && !ft_isquotes(g_var.from_rl[i]))
+        ++i;
+    if (ft_isquotes(g_var.from_rl[i]))
+        curr_q = g_var.from_rl[i++];
 	while (g_var.from_rl[i])
 	{
-		if (ft_isquotes(g_var.from_rl[i]))
-		{
-			curr_q = g_var.from_rl[i];
-			++i;
-		}
         i += ft_loop_quotes(&g_var.from_rl[i], curr_q);
-		// while (g_var.from_rl[i] && g_var.from_rl[i] != curr_q)
-		// 	++i;
 		if (g_var.from_rl[i] == curr_q)
 			curr_q = 0;
 		if (g_var.from_rl[i])
