@@ -32,9 +32,26 @@ void     get_prompt(void)
 }
 */
 
+static char    *set_str_color(char *src, int start, char *color)
+{
+        char	*color_str;
+        char	*temp;
+        char    *result;
+
+        temp = ft_strjoin(color, src + start);
+        color_str = ft_strjoin(temp, RES);
+        free(temp);
+        temp = ft_substr(src, 0, start);
+        result = ft_strjoin(temp, color_str);
+        free(temp);
+        free(color_str);
+        return (result);
+}
+
 void     set_prompt(t_shell *sh)
 {
 	char	*temp;
+	char	*cwd_color;
 	char	*cwd;
 
 	cwd = malloc(256 * sizeof(*cwd));
@@ -51,9 +68,11 @@ void     set_prompt(t_shell *sh)
 			cwd = temp;
 		}
 	}
-        temp = ft_strjoin(sh->usr, cwd);
-	sh->prompt = ft_strjoin(temp, "$ ");
+        cwd_color = set_str_color(cwd, 1, YEL);
 	free(cwd);
+        temp = ft_strjoin(sh->usr, cwd_color);
+        free(cwd_color);
+	sh->prompt = ft_strjoin(temp, "$ ");
 	free(temp);
 }
 
@@ -63,7 +82,7 @@ static void    shell_init(int argc, char **argv, char **env)
 	(void) argv;
 	signal_settings();
 	g_var.env = dup_2d(env);
-	g_var.usr = ft_strdup(mini_getenv("USER"));
+	g_var.usr = set_str_color(mini_getenv("USER"), 0, BCYN);
 	g_var.from_rl = NULL;
 	g_var.command = NULL;
 	g_var.prompt = NULL;
