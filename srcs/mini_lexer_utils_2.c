@@ -1,7 +1,5 @@
 #include "minishell.h"
 
-// detect var from env
-
 int  ft_loop_until(const char *s, char c, int flag)
 {
 	int	len;

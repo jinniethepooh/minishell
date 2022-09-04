@@ -2,8 +2,7 @@
 
 static int  ft_is_skipped(char c, char delim)
 {
-    // return (c == delim || c == '$' || ft_isredir(c) || ft_isquotes(c) || c == 0);
-    return (c == delim || ft_isredir(c) || ft_isquotes(c) || c == 0);
+    return (c == delim || ft_isredir(c) || c == 0);
 }
 
 static int  ft_piece_loop(char *s, char c)
@@ -11,12 +10,8 @@ static int  ft_piece_loop(char *s, char c)
     int i;
 
     i = 0;
-    if (ft_isquotes(s[i]))
-        return (ft_loop_until(&s[i + 1], s[i], 0) + 2);
     if (ft_isredir(s[i]))
         return (ft_loop_until(&s[i], s[i], 1));
-    // if (s[i] == '$')
-    //     i++;
     while (s[i] && !ft_is_skipped(s[i], c))
         i++;
     return (i);
