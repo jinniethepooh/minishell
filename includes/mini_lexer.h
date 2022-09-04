@@ -2,6 +2,13 @@
 # define MINI_LEXER
 
 
+typedef struct s_cmd_loop
+{
+    int     i;
+    char    *dst;
+    char    *tmp;
+}   t_cmd_loop;
+
 /* mini_lexer_utils_1 - pipe split */
 char	**pipe_split(char const *s, char c);
 
@@ -12,6 +19,7 @@ int		ft_isvalid_quotes(void);
 /* mini_lexer_utils_3 - clean output from cmd_split */
 char	**cmd_split(char const *s, char c);
 char    **cmd_cleaner(char **arr);
+void    *cmd_cleaner_loop(char *src);
 
 /* mini_lexer_utils_5 - quote cleaner */
 char    *cmd_cleaner_quotes(char *src);
@@ -20,6 +28,8 @@ char    *cmd_cleaner_quotes(char *src);
 char    *cmd_cleaner_var(char *src);
 
 /* mini_lexer_utils_7 - redir cleaner */
+int     get_cmd_move(char *s);
+
 char    *cmd_cleaner_redir(char *src);
 
 /* mini_lexer */
