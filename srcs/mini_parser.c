@@ -55,6 +55,8 @@ static void	mini_split_getenv(char **arg)
 	val = mini_substitute_env(*arg);
 	while ((*arg)[i] && ft_isalnum((*arg)[i]))
 		i++;
+	if (i == 0 && (*arg)[i] == '?')
+		i++;
 	new = ft_strjoin(val, *arg + i);
 	free(*arg);
 	*arg = new;
