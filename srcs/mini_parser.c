@@ -43,7 +43,7 @@ static char	*get_parsed_arg(char *arg, char **before, char **after)
 		{
 			if (ft_strncmp(arg + i, *before, ft_strlen(*before)) == 0)
 			{
-				strcpy(--temp, *after);
+				ft_strcpy(--temp, *after);
 				temp += ft_strlen(*after++);
 				i += ft_strlen(*before++);
 			}
