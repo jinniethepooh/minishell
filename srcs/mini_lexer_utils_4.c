@@ -6,8 +6,8 @@ static void    *cmd_cleaner_loop(char *src)
         return(ft_strdup(src));
     else if (ft_isredir(*src))
         return(ft_strdup(src));
-    else if (*src == '$' && ft_strcmp(src, "$"))
-        return (cmd_cleaner_var(src));
+    //else if (*src == '$' && ft_strcmp(src, "$"))
+    //    return (cmd_cleaner_var(src));
     else
         return(ft_strdup(src)); // to add having $
 }

@@ -63,6 +63,9 @@ int		ft_isredir(char c);
 void    mini_exit(t_shell *sh);
 void	clear_command(t_command **head);
 
+/* mini_parser.c */
+void	mini_parser_env(char **arg);
+
 /* mini_cmd_utils.c */
 char	*set_cmd_path(t_command *c);
 int		get_num_cmd(t_shell *sh);

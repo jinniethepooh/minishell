@@ -3,7 +3,7 @@
 // ' not interpret
 // " interpret
 
-static void *cmd_cleaner_quotes(char *src)
+char *cmd_cleaner_quotes(char *src)
 {
     int         i;
     char    *dst;
