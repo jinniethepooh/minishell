@@ -2,13 +2,15 @@
 
 static char *cmd_var_gen(char *src)
 {
-    t_cmd_loop  v;
+    int     i;
+    char    *tmp;
+    char    *dst;
 
-    v.i = get_cmd_move(src) - 1;
-    v.tmp = ft_substr(src + 1, 0, v.i);
-    v.dst = mini_getenv(v.tmp);
-    free (v.tmp);
-    return (v.dst);
+    i = get_cmd_move(src) - 1;
+    tmp = ft_substr(src + 1, 0, i);
+    dst = mini_getenv(tmp);
+    free (tmp);
+    return (dst);
 }
 
 char    *cmd_cleaner_var(char *src)

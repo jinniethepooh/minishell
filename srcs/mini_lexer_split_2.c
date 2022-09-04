@@ -1,10 +1,5 @@
 #include "minishell.h"
 
-static int  ft_is_skipped(char c, char delim)
-{
-    return (c == delim || ft_isredir(c) || c == 0);
-}
-
 static int  ft_piece_loop(char *s, char c)
 {
     int i;
@@ -12,8 +7,12 @@ static int  ft_piece_loop(char *s, char c)
     i = 0;
     if (ft_isredir(s[i]))
         return (ft_loop_until(&s[i], s[i], 1));
-    while (s[i] && !ft_is_skipped(s[i], c))
+    while (s[i] && s[i] != c)
+    {
+        if (ft_isquotes(s[i]))
+            i += ft_loop_until(&s[i + 1], s[i], 0);
         i++;
+    }
     return (i);
 }
 

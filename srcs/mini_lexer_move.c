@@ -1,13 +1,13 @@
 #include "minishell.h"
 
+int get_var_skip(char c)
+{
+    return (!(c == '\0' || c == '$' || ft_isquotes(c) || ft_isspace(c)));
+}
+
 static int  get_quo_move(char *s)
 {
-    // int     len;
-
-    // len = 1;
-    if (*s == '\'')
-        return (ft_loop_until(s + 1, *s, 0) + 2);
-    return (ft_strlen(s));
+    return (ft_loop_until(s + 1, *s, 0) + 2);
 }
 
 static int  get_var_move(char *s)
@@ -19,12 +19,9 @@ static int  get_var_move(char *s)
         return (2);
     else
     {
-        while (s[len] && s[len] != '$' && !ft_isquotes(s[len]))
+        while (get_var_skip(s[len]))
             len++;
-        if (!s[len])
-            return (len + 1);
-        else
-            return (len);
+        return (len);
     }
 }
 
