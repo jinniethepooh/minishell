@@ -109,3 +109,18 @@ char	**rm_from_2d(char ***old_arr, int idx)
 	*old_arr = new_arr;
 	return (*old_arr);
 }
+
+char	**map_2d(char ***arr, void (*f)(char **))
+{
+	int	i;
+
+	if (!*arr)
+		return (0);
+	i = 0;
+	while ((*arr)[i])
+	{
+		(*f)((*arr) + i);
+		i++;
+	}
+	return (*arr);
+}
