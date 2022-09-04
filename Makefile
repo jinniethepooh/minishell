@@ -5,9 +5,9 @@ OBJ_DIR = objs/
 
 SRC_FILE = mini_cmd_utils mini_exec mini_exec_utils mini_env \
 	mini_builtin mini_builtin_func mini_redir mini_parser \
-	mini_lexer mini_lexer_utils_1 mini_lexer_utils_2 mini_lexer_utils_3 \
-	mini_lexer_utils_4 mini_lexer_utils_5 mini_lexer_utils_6 mini_lexer_utils_7 \
-	mini_signal mini_exit mini_utils \
+	mini_lexer mini_lexer_move mini_lexer_split_1 mini_lexer_split_2 \
+	mini_cleaner_cmd mini_cleaner_quotes mini_cleaner_var mini_cleaner_redir \
+	mini_signal mini_exit mini_utils_1 mini_utils_2 \
 	mini_main
 	# main
 SRCS = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILE)))
