@@ -85,6 +85,7 @@ static void	shell_init(int argc, char **argv, char **env)
 	g_var.from_rl = NULL;
 	g_var.command = NULL;
 	g_var.prompt = NULL;
+	g_var.export = NULL;
 	//g_var.dir = NULL;
 }
 
@@ -94,7 +95,6 @@ int	 main(int argc, char **argv, char **env)
 	while (1)
 	{
 		set_prompt(&g_var);
-		//g_var.from_rl = readline("");
 		//get_prompt();
 		g_var.from_rl = readline(g_var.prompt);
 		if (g_var.from_rl == NULL)

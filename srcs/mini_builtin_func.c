@@ -51,8 +51,22 @@ int	builtin_pwd(void)
 
 int	builtin_export(char **args)
 {
-	mini_setenv(args[1], "test");
-	return (EXIT_SUCCESS);
+	int	status;
+
+	status = EXIT_SUCCESS;
+	if (!args[1])
+	{
+		print_2d(g_var.env, '\n');
+		printf("\n");
+	}
+	while (*++args)
+	{
+		if (status == EXIT_SUCCESS)
+			status = export_env(*args);
+		else
+			export_env(*args);
+	}
+	return (status);
 }
 
 int	builtin_unset(char **args)
@@ -60,14 +74,17 @@ int	builtin_unset(char **args)
 	char	*temp;
 	int		i;
 
-	temp = ft_strjoin(args[1], "=");
-	i = 0;
-	while (ft_strncmp(temp, g_var.env[i], ft_strlen(temp)) != 0)
-		if (!g_var.env[++i])
-			break ;
-	free(temp);
-	if (g_var.env[i])
-		rm_from_2d(&g_var.env, i);
+	while (*++args)
+	{
+		temp = ft_strjoin(*args, "=");
+		i = 0;
+		while (ft_strncmp(temp, g_var.env[i], ft_strlen(temp)) != 0)
+			if (!g_var.env[++i])
+				break ;
+		free(temp);
+		if (g_var.env[i])
+			rm_from_2d(&g_var.env, i);
+	}
 	return (EXIT_SUCCESS);
 }
 

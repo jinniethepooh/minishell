@@ -4,7 +4,7 @@ SRC_DIR = srcs/
 OBJ_DIR = objs/
 
 SRC_FILE = mini_cmd_utils mini_exec mini_exec_utils mini_env \
-	mini_builtin mini_builtin_func mini_redir mini_parser \
+	mini_builtin mini_builtin_func mini_redir mini_parser mini_export \
 	mini_lexer mini_lexer_move mini_lexer_split_1 mini_lexer_split_2 \
 	mini_cleaner_cmd mini_cleaner_quotes mini_cleaner_var mini_cleaner_redir \
 	mini_signal mini_exit mini_utils_1 mini_utils_2 \

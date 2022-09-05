@@ -23,6 +23,14 @@
 # include "mini_signal.h"
 # include "mini_lexer.h"
 
+typedef struct s_export
+{
+	int				status;
+	char			*name;
+	char			*val;
+	struct s_export	*prev;
+}	t_export;
+
 typedef struct s_pipex
 {
 	int		n_pipe;
@@ -45,10 +53,9 @@ typedef struct s_shell
 	char		*prompt;
 	t_command	*command;
 	char		*from_rl;
-	//char		cwd[256];
-	//char		**dir;
 	char		**env;
 	int			exit_status;
+	t_export	*export;
 }	t_shell;
 
 t_shell	g_var;
@@ -100,5 +107,9 @@ int		builtin_export(char **args);
 int		builtin_unset(char **args);
 int		builtin_env(void);
 int		builtin_exit(void);
+
+/* mini_export.c */
+int		export_env(char *arg);
+char	**push_to_export(char ***arr);
 
 #endif
