@@ -30,7 +30,7 @@ char    *cmd_cleaner_var(char *src);
 
 /* mini_lexer_move.c - mover */
 int     get_var_skip(char c);
-int     get_cmd_move(char *s);
+int     get_cmd_move(char *s, int flag);
 
 /* mini_utils_2.c - quote handling helper ---> to move to minishell.h */
 int 	ft_loop_until(const char *s, char c, int flag);

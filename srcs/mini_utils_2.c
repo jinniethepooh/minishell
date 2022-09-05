@@ -30,12 +30,13 @@ static int quotes_checker(void)
 	while (g_var.from_rl[i])
 	{
 		if (ft_isquotes(g_var.from_rl[i]))
+		{
 			curr_q = g_var.from_rl[i++];
-		i += ft_loop_until(&g_var.from_rl[i], curr_q, 0);
+			i += ft_loop_until(&g_var.from_rl[i], curr_q, 0);
+		}
 		if (g_var.from_rl[i] == curr_q)
 			curr_q = 0;
-		if (g_var.from_rl[i])
-			++i;
+		++i;
 	}
 	return (curr_q);
 }

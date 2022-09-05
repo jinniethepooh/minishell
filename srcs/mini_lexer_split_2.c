@@ -10,7 +10,7 @@ static int  ft_piece_loop(char *s, char c)
     while (s[i] && s[i] != c)
     {
         if (ft_isquotes(s[i]))
-            i += ft_loop_until(&s[i + 1], s[i], 0);
+            i += ft_loop_until(&s[i + 1], s[i], 0) + 1;
         i++;
     }
     return (i);

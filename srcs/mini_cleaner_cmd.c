@@ -16,8 +16,8 @@ void	*cmd_cleaner_loop(char *src, int flag)
         else if (src[i] == '$' && get_var_skip(src[i + 1]))
             dst = ft_strjoin(dst, cmd_cleaner_var(&src[i]));
         else
-            dst = ft_strjoin(dst, ft_substr(&src[i], 0, get_cmd_move(&src[i])));
-        i += get_cmd_move(&src[i]);
+            dst = ft_strjoin(dst, ft_substr(&src[i], 0, get_cmd_move(&src[i], flag)));
+        i += get_cmd_move(&src[i], flag);
     }
     return (dst);
 }
