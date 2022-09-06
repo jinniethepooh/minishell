@@ -80,6 +80,7 @@ int		get_num_cmd(t_shell *sh);
 /* mini_env.c */
 int		mini_setenv(char *name, char *val);
 char	*mini_getenv(char *name);
+int		is_envname_valid(char *name);
 
 /* mini_redir.c */
 void	mini_redir_input(t_command *c, char *mode, char *name);
@@ -108,8 +109,18 @@ int		builtin_unset(char **args);
 int		builtin_env(void);
 int		builtin_exit(void);
 
+/* mini_unset.c */
+int		unset_env(char *arg);
+int		do_unset_bef(char *name);
+
 /* mini_export.c */
 int		export_env(char *arg);
-char	**push_to_export(char ***arr);
+char	**map_val_to_export(char ***arr);
+
+/* mini_export_utils.c */
+t_export	*exp_stack_new(char *name, char *val);
+void		exp_stack_push(t_export **stack, t_export *node);
+void		exp_stack_clear(t_export **head);
+int			is_export_bef(char *name);
 
 #endif

@@ -71,21 +71,17 @@ int	builtin_export(char **args)
 
 int	builtin_unset(char **args)
 {
-	char	*temp;
-	int		i;
+	int	status;
 
+	status = EXIT_SUCCESS;
 	while (*++args)
 	{
-		temp = ft_strjoin(*args, "=");
-		i = 0;
-		while (ft_strncmp(temp, g_var.env[i], ft_strlen(temp)) != 0)
-			if (!g_var.env[++i])
-				break ;
-		free(temp);
-		if (g_var.env[i])
-			rm_from_2d(&g_var.env, i);
+		if (status == EXIT_SUCCESS)
+			status = unset_env(*args);
+		else
+			unset_env(*args);
 	}
-	return (EXIT_SUCCESS);
+	return (status);
 }
 
 int	builtin_env(void)

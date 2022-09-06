@@ -36,3 +36,20 @@ char	*mini_getenv(char *name)
 		return (g_var.env[i] + ft_strlen(name) + 1);
 	return (0);
 }
+
+int	is_envname_valid(char *name)
+{
+	if (name && *name)
+	{
+		if (ft_isalpha(*name) || *name == '_')
+		{
+			while (*name && (ft_isalnum(*name) || *name == '_'))
+				name++;
+			if (*name == '=')
+				return (1);
+			if (!*name)
+				return (2);
+		}
+	}
+	return (0);
+}

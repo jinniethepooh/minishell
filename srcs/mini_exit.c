@@ -8,6 +8,7 @@ void    mini_exit(t_shell *sh)
 	free(sh->usr);
 	free_2d(sh->env);
 	clear_command(&sh->command);
+	exp_stack_clear(&sh->export);
 	exit(EXIT_SUCCESS);
 }
 
