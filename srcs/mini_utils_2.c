@@ -50,3 +50,14 @@ int	ft_isvalid_quotes(void)
 	}
 	return (1);
 }
+
+int	ft_isvalid_pipe(void)
+{
+	if (g_var.from_rl[ft_strlen(g_var.from_rl) - 1] == '|')
+	{
+		printf("tinyshell: ");
+		printf(RED"syntax error near unexpected token `|'\n");
+		return (0);
+	}
+	return (1);
+}

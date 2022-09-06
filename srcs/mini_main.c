@@ -100,7 +100,7 @@ int	 main(int argc, char **argv, char **env)
 		if (g_var.from_rl == NULL)
 			mini_exit(&g_var);
 		get_history();
-		if (ft_isvalid_quotes())
+		if (ft_isvalid_quotes() && ft_isvalid_pipe())
 		{
 			get_cmd();
 			g_var.exit_status = mini_exec(&g_var);

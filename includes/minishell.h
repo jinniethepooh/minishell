@@ -64,6 +64,11 @@ int		ft_wcount(const char *s, char c);
 int		ft_isspace(char c);
 int		ft_isquotes(char c);
 int		ft_isredir(char c);
+int		ft_isvalid_pipe(void);
+int		ft_isvalid_quotes(void);
+
+/* helper */
+int 	ft_loop_until(const char *s, char c, int flag);
 
 /* mini_exit.c */
 void    mini_exit(t_shell *sh);
