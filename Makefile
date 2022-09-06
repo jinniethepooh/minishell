@@ -3,14 +3,13 @@ NAME = minishell
 SRC_DIR = srcs/
 OBJ_DIR = objs/
 
-SRC_FILE = mini_cmd_utils mini_exec mini_exec_utils mini_env \
-	mini_builtin mini_builtin_func mini_export mini_export_utils mini_unset \
-	mini_redir mini_parser \
+SRC_FILE = mini_exec mini_exec_utils mini_cmd_utils \
+	mini_builtin mini_builtin_func mini_builtin_func2 mini_export mini_export_utils \
+	mini_redir mini_env \
 	mini_lexer mini_lexer_move mini_lexer_split_1 mini_lexer_split_2 \
 	mini_cleaner_cmd mini_cleaner_quotes mini_cleaner_var \
 	mini_signal mini_exit mini_utils_1 mini_utils_2 \
 	mini_main
-	# main
 SRCS = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILE)))
 OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILE)))
 

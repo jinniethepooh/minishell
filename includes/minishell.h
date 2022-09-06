@@ -51,10 +51,10 @@ typedef struct s_shell
 	char		*usr;
 	char		*prompt;
 	t_command	*command;
+	t_export	*export;
 	char		*from_rl;
 	char		**env;
 	int			exit_status;
-	t_export	*export;
 }	t_shell;
 
 t_shell	g_var;
@@ -74,9 +74,6 @@ int 	ft_loop_until(const char *s, char c, int flag);
 void    mini_exit(t_shell *sh);
 void	clear_command(t_command **head);
 
-/* mini_parser.c */
-void	mini_parser_env(char **arg);
-
 /* mini_cmd_utils.c */
 char	*set_cmd_path(t_command *c);
 int		get_num_cmd(t_shell *sh);
@@ -89,8 +86,6 @@ int		is_envname_valid(char *name);
 /* mini_redir.c */
 char	**map_val_to_redir(t_command *cmd);
 void	mini_redir(t_command *c, char *mode, char *name);
-void	mini_redir_input(t_command *c, char *mode, char *name);
-void	mini_redir_output(t_command *c, char *mode, char *name);
 t_pipex	mini_heredoc(char *eof);
 
 /* mini_exec.c */
@@ -110,12 +105,12 @@ int		call_builtin(t_command *c);
 int		builtin_echo(char **args);
 int		builtin_cd(char **args);
 int		builtin_pwd(void);
-int		builtin_export(char **args);
-int		builtin_unset(char **args);
 int		builtin_env(void);
 int		builtin_exit(void);
 
-/* mini_unset.c */
+/* mini_builtin_func2.c */
+int		builtin_export(char **args);
+int		builtin_unset(char **args);
 int		unset_env(char *arg);
 
 /* mini_export.c */

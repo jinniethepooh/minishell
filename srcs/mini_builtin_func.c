@@ -26,10 +26,12 @@ int	builtin_cd(char **args)
 	target = args[1];
 	if (!target)
 		target = mini_getenv("HOME");
-		// target = "..";
 	if (chdir(target) < 0)
 	{
-		perror("cd");
+		if (mini_getenv("HOME"))
+			perror("cd");
+		else
+			ft_putstr_fd("cd: HOME not set\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	old_wd = mini_getenv("PWD");
@@ -48,41 +50,6 @@ int	builtin_pwd(void)
 	getcwd(cwd, sizeof(cwd));
 	printf("%s\n", cwd);
 	return (EXIT_SUCCESS);
-}
-
-int	builtin_export(char **args)
-{
-	int	status;
-
-	status = EXIT_SUCCESS;
-	if (!args[1])
-	{
-		print_2d(g_var.env, '\n');
-		printf("\n");
-	}
-	while (*++args)
-	{
-		if (status == EXIT_SUCCESS)
-			status = export_env(*args);
-		else
-			export_env(*args);
-	}
-	return (status);
-}
-
-int	builtin_unset(char **args)
-{
-	int	status;
-
-	status = EXIT_SUCCESS;
-	while (*++args)
-	{
-		if (status == EXIT_SUCCESS)
-			status = unset_env(*args);
-		else
-			unset_env(*args);
-	}
-	return (status);
 }
 
 int	builtin_env(void)
