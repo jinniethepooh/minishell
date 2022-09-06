@@ -15,7 +15,7 @@ static void     respond_sig_child(int signum, siginfo_t *info, void *context)
         (void) info;
 
         if (signum == SIGINT)
-                g_var.exit_status = EXIT_SIGINT;
+                g_var.sig_detect = 1;
 }
 
 void     signal_settings_child(void)
@@ -35,8 +35,8 @@ static void     respond_sig(int signum, siginfo_t *info, void *context)
 
         if (signum == SIGINT)
         {
-                g_var.exit_status = EXIT_SIGINT;
-                ioctl(STDIN_FILENO, TIOCSTI, "\n");    
+                g_var.sig_detect = 1;
+                ioctl(STDIN_FILENO, TIOCSTI, "\n");
                 rl_on_new_line();
                 rl_replace_line("", 0);
         }

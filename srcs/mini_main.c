@@ -56,6 +56,7 @@ void	set_prompt(t_shell *sh)
 	temp = ft_strjoin(sh->usr, cwd_color);
 	free(cwd_color);
 	sh->prompt = ft_strjoin(temp, "$ ");
+	g_var.sig_detect = 0;
 	free(temp);
 }
 
@@ -86,6 +87,8 @@ int	 main(int argc, char **argv, char **env)
 		{
 			get_cmd();
 			g_var.exit_status = mini_exec(&g_var);
+			if (g_var.sig_detect)
+				g_var.exit_status = EXIT_SIGINT;
 			signal_settings();
 		}
 		free(g_var.prompt);
