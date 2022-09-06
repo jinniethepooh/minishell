@@ -46,6 +46,7 @@ int	ft_isvalid_quotes(void)
 	if (quotes_checker())
 	{
 		printf("tinyshell: "RED"invaid quotes\n");
+		g_var.exit_status = EXIT_FAILURE;
 		return (0);
 	}
 	return (1);
@@ -57,6 +58,7 @@ int	ft_isvalid_pipe(void)
 	{
 		printf("tinyshell: ");
 		printf(RED"syntax error near unexpected token `|'\n");
+		g_var.exit_status = EXIT_FAILURE;
 		return (0);
 	}
 	return (1);

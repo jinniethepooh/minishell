@@ -28,6 +28,7 @@ static int	fork_proc(t_command *cmd, t_pipex px, int idx)
 		return (wait_pipe(px));
 	}
 	px.proc[idx] = fork();
+	signal_settings_child();
 	if (px.proc[idx] < 0)
 	{
 		perror("fork");

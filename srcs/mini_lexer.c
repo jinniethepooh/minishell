@@ -1,19 +1,5 @@
 #include "minishell.h"
 
-// static void     redir_check_cmd(t_command **cmd)
-// {
-//	 int i;
-
-//	 i = 0;
-//	 while ((*cmd)->cmd_args[i])
-//	 {
-//	     if (!ft_strcmp((*cmd)->cmd_args[i], ">"))
-//		 mini_redir_output((*cmd), ">", )
-
-//	     ++i;
-//	 }
-// }
-
 static void     manage_cmd(t_command **cmd, char *raw_cmd)
 {
 	*cmd = malloc(sizeof(**cmd));
@@ -29,7 +15,6 @@ static void     manage_cmd(t_command **cmd, char *raw_cmd)
 	while ((*cmd)->cmd_args[++j])
 	    printf("%d) lex cmd [%s]\n", j, (*cmd)->cmd_args[j]);
 	(*cmd)->cmd_path = NULL;
-	// redir_check_cmd(cmd);
 }
 
 void    get_cmd(void)

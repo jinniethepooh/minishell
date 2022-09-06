@@ -3,6 +3,7 @@
 void    mini_exit(t_shell *sh)
 {
 	printf("... exiting hell, "BRED"to a deeper!\n"RES);
+	rl_clear_history();
 	free(sh->prompt);
 	free(sh->from_rl);
 	free(sh->usr);

@@ -16,22 +16,6 @@ static void	 get_history(void)
 	}
 }
 
-/*
-void	 get_prompt(void)
-{
-	int	 cwd_count;
-	int	 i;
-
-	g_var.dir = ft_split(getcwd(g_var.cwd, sizeof(g_var.cwd)), '/');
-	cwd_count = ft_wcount(g_var.cwd, '/') - 1;
-	g_var.prompt = ft_strjoin(ft_strjoin(BCYN"tinyshell "RES, g_var.dir[cwd_count]), YEL" $ "RES);
-	i = -1;
-	while (g_var.dir[++i])
-		free(g_var.dir[i]);
-	free(g_var.dir);
-}
-*/
-
 static char	*set_str_color(char *src, int start, char *color)
 {
 	char	*color_str;
@@ -94,7 +78,6 @@ int	 main(int argc, char **argv, char **env)
 	while (1)
 	{
 		set_prompt(&g_var);
-		//get_prompt();
 		g_var.from_rl = readline(g_var.prompt);
 		if (g_var.from_rl == NULL)
 			mini_exit(&g_var);
@@ -103,6 +86,7 @@ int	 main(int argc, char **argv, char **env)
 		{
 			get_cmd();
 			g_var.exit_status = mini_exec(&g_var);
+			signal_settings();
 		}
 		free(g_var.prompt);
 		free(g_var.from_rl);
