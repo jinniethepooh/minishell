@@ -28,6 +28,8 @@ char	*set_cmd_path(t_command *c)
 		c->cmd_path = get_access_cmd(c->cmd_args, env_paths);
 		free_2d(env_paths);
 	}
+	else
+		c->cmd_path = ft_strdup(c->cmd_args[0]);
 	return (c->cmd_path);
 }
 
@@ -41,8 +43,6 @@ static char	*get_access_cmd(char **cmd_args, char **env_paths)
 		return (0);
 	if (access(cmd_args[0], F_OK) == 0)
 		return (ft_strdup(cmd_args[0]));
-	//else if (ft_strchr(c->cmd_args[0], '/'))
-	//	return (0);
 	i = 0;
 	while (env_paths[i])
 	{
