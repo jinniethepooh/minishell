@@ -2,7 +2,7 @@
 
 static void    echo_off(void)
 {
-        struct termios tio;
+        struct termios  tio;
 
         tcgetattr(STDIN_FILENO, &tio);
         tio.c_lflag &= ~ECHOCTL;
@@ -26,7 +26,6 @@ void     signal_settings_child(void)
 	sact.sa_flags = SA_SIGINFO;
 	sact.sa_sigaction = respond_sig_child;
 	sigaction(SIGINT, &sact, NULL);
-	sigaction(SIGQUIT, &sact, NULL);
 }
 
 static void     respond_sig(int signum, siginfo_t *info, void *context)
