@@ -86,7 +86,6 @@ static void	shell_init(int argc, char **argv, char **env)
 	g_var.command = NULL;
 	g_var.prompt = NULL;
 	g_var.export = NULL;
-	//g_var.dir = NULL;
 }
 
 int	 main(int argc, char **argv, char **env)
@@ -111,18 +110,3 @@ int	 main(int argc, char **argv, char **env)
 	mini_exit(&g_var);
 	return (EXIT_SUCCESS);
 }
-
-// ----- for linked list print ----- //
-// int i = 0;
-// t_command *test;
-// while (test)
-// {
-//	  i = 0;
-//	  while (test->cmd_args[i])
-//	  {
-//		  printf("|%s|\n", test->cmd_args[i]);
-//		  ++i;
-//	  }
-//	  test = test->next;
-// }
-// ----- end linked list print ----- //

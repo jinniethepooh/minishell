@@ -7,13 +7,11 @@ void	*cmd_cleaner_loop(char *src, int flag)
 
 	dst = NULL;
 	i = 0;
-	//if (ft_strchr(src, '$'))
-	//	return (ft_strdup(src));
 	while (src[i])
     {
         if (ft_isquotes(src[i]) && flag)
             dst = ft_strjoin(dst, cmd_cleaner_quotes(&src[i]));
-        else if (src[i] == '$' && get_var_skip(src[i + 1]))
+        else if (src[i] == '$' && (get_var_skip(src[i + 1]) || src[i + 1] == '?'))
             dst = ft_strjoin(dst, cmd_cleaner_var(&src[i]));
         else
             dst = ft_strjoin(dst, ft_substr(&src[i], 0, get_cmd_move(&src[i], flag)));

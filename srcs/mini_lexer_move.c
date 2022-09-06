@@ -2,8 +2,7 @@
 
 int get_var_skip(char c)
 {
-    return (!(c == '\0' || c == '$' || ft_isquotes(c) || ft_isspace(c)) \
-                && (ft_isalpha(c) || c == '_' || c == '?'));
+    return (ft_isalpha(c) || c == '_');
 }
 
 static int  get_quo_move(char *s)
