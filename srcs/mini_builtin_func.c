@@ -25,7 +25,8 @@ int	builtin_cd(char **args)
 
 	target = args[1];
 	if (!target)
-		target = "..";
+		target = mini_getenv("HOME");
+		// target = "..";
 	if (chdir(target) < 0)
 	{
 		perror("cd");
