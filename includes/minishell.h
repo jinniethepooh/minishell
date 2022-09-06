@@ -82,6 +82,8 @@ char	*mini_getenv(char *name);
 int		is_envname_valid(char *name);
 
 /* mini_redir.c */
+char	**map_val_to_redir(t_command *cmd);
+void	mini_redir(t_command *c, char *mode, char *name);
 void	mini_redir_input(t_command *c, char *mode, char *name);
 void	mini_redir_output(t_command *c, char *mode, char *name);
 t_pipex	mini_heredoc(char *eof);

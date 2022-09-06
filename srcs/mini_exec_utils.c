@@ -26,12 +26,10 @@ void	exec_pipe(t_command *c)
 			exit(127);
 		}
 		if (execve(c->cmd_path, c->cmd_args, g_var.env) < 0)
-			perror("execve");
+			perror(c->cmd_args[0]);
 	}
 	else
-	{
 		exit(call_builtin(c));
-	}
 }
 
 void	close_pipe(t_pipex p)

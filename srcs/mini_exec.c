@@ -15,8 +15,6 @@ int mini_exec(t_shell *sh)
 			return (EXIT_SUCCESS);
 		if (is_builtin(cmd->cmd_args))
 			return (call_builtin(cmd));
-		//if (ft_strchr(cmd->cmd_args[0], '='))
-		//	return ();
 	}
 	px = setup_pipe(get_num_cmd(sh) - 1);
 	return (fork_proc(cmd, px, 0));
