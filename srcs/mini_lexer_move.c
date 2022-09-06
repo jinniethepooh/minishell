@@ -2,7 +2,8 @@
 
 int get_var_skip(char c)
 {
-    return (!(c == '\0' || c == '$' || ft_isquotes(c) || ft_isspace(c)));
+    return (!(c == '\0' || c == '$' || ft_isquotes(c) || ft_isspace(c)) \
+                && (ft_isalpha(c) || c == '_' || c == '?'));
 }
 
 static int  get_quo_move(char *s)
@@ -25,19 +26,16 @@ static int  get_var_move(char *s)
     }
 }
 
-int  get_cmd_move(char *s)
+int  get_cmd_move(char *s, int flag)
 {
     int len;
 
     len = 0;
-    if (ft_isquotes(s[len]))
+    if (ft_isquotes(s[len]) && flag)
         return (get_quo_move(s));
-    else if (s[len] == '$')
+    if (s[len] == '$')
         return (get_var_move(s));
-    else
-    {
-        while (s[len] && s[len] != '$' && !ft_isquotes(s[len]))
-            len++;
-    }
+    while (s[len] && s[len] != '$' && !(ft_isquotes(s[len]) && flag))
+        len++;
     return (len);
 }

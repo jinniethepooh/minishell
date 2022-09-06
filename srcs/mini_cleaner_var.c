@@ -6,7 +6,7 @@ static char *cmd_var_gen(char *src)
     char    *tmp;
     char    *dst;
 
-    i = get_cmd_move(src) - 1;
+    i = get_cmd_move(src, 1) - 1;
     tmp = ft_substr(src + 1, 0, i);
     dst = mini_getenv(tmp);
     free (tmp);
