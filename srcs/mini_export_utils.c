@@ -5,7 +5,7 @@ t_export	*exp_stack_new(char *name, char *val)
 	t_export	*node;
 
 	node = malloc(sizeof(*node));
-	node->status = 1;
+	//node->status = 1;
 	node->name = name;
 	node->val = val;
 	node->prev = NULL;
@@ -36,24 +36,22 @@ void	exp_stack_clear(t_export **head)
 	exp_stack_clear(head);
 }
 
-int	is_export_bef(char *name)
+void	exp_stack_remove_if(t_export **head, char *data_ref)
 {
-	t_export	*exp;
-	int			ret;
+	t_export	*cur;
 
-	ret = 0;
-	exp = g_var.export;
-	while (exp)
+	if (!(head && *head))
+		return ;
+	cur = *head;
+	if (ft_strcmp(cur->name, data_ref) == 0)
 	{
-		if (ft_strcmp(exp->name, name) == 0)
-		{
-			if (exp->status < 0)
-			{
-				exp->status = 0;
-				ret = 1;
-			}
-		}
-		exp = exp->prev;
+		*head = cur->prev;
+		if (cur->name)
+			free(cur->name);
+		if (cur->val)
+			free(cur->val);
+		free(cur);
+		exp_stack_remove_if(head, data_ref);
 	}
-	return (ret);
+	exp_stack_remove_if(&cur->prev, data_ref);
 }

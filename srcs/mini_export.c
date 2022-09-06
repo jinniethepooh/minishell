@@ -1,6 +1,7 @@
 #include "minishell.h"
 
 static void	mini_export_setenv(char *name);
+static int	is_export_bef(char *name);
 
 char	**map_val_to_export(char ***args)
 {
@@ -12,7 +13,7 @@ char	**map_val_to_export(char ***args)
 	i = 0;
 	while ((*args)[i])
 	{
-		if (is_envname_valid((*args)[i]) != 1) // without '='
+		if (is_envname_valid((*args)[i]) != 1)
 			break ;
 		name = ft_strdup((*args)[i]);
 		*ft_strchr(name, '=') = 0;
@@ -31,7 +32,7 @@ int	export_env(char *arg)
 
 	if (is_envname_valid(arg))
 	{
-		if (is_envname_valid(arg) == 1) // with '='
+		if (is_envname_valid(arg) == 1)
 		{
 			name = ft_strdup(arg);
 			*ft_strchr(name, '=') = 0;
@@ -39,7 +40,7 @@ int	export_env(char *arg)
 				exp_stack_new(name, ft_strdup(ft_strchr(arg, '=') + 1)));
 			mini_export_setenv(name);
 		}
-		else // without '='
+		else
 			mini_export_setenv(arg);
 		return (EXIT_SUCCESS);
 	}
@@ -52,26 +53,32 @@ int	export_env(char *arg)
 static void	mini_export_setenv(char *name)
 {
 	t_export	*exp;
-	int			to_set;
 
-	to_set = 1;
+	exp = g_var.export;
+	while (exp)
+	{
+		if (ft_strcmp(exp->name, name) == 0 && exp->val)
+		{
+			mini_setenv(exp->name, exp->val);
+			exp_stack_remove_if(&g_var.export, name);
+			return ;
+		}
+		exp = exp->prev;
+	}
+	exp_stack_push(&g_var.export, exp_stack_new(ft_strdup(name), 0));
+}
+
+static int	is_export_bef(char *name)
+{
+	t_export	*exp;
+
 	exp = g_var.export;
 	while (exp)
 	{
 		if (ft_strcmp(exp->name, name) == 0)
-		{
-			if (to_set && exp->status > 0)
-				mini_setenv(exp->name, exp->val);
-			if (exp->status)
-				to_set = 0;
-			if (exp->status >= 0)
-				exp->status = 0;
-		}
+			if (!exp->val)
+				return (1);
 		exp = exp->prev;
 	}
-	if (to_set)
-	{
-		exp_stack_push(&g_var.export, exp_stack_new(ft_strdup(name), 0));
-		g_var.export->status = -1;
-	}
+	return (0);
 }

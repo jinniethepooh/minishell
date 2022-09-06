@@ -25,7 +25,6 @@
 
 typedef struct s_export
 {
-	int				status;
 	char			*name;
 	char			*val;
 	struct s_export	*prev;
@@ -111,7 +110,6 @@ int		builtin_exit(void);
 
 /* mini_unset.c */
 int		unset_env(char *arg);
-int		do_unset_bef(char *name);
 
 /* mini_export.c */
 int		export_env(char *arg);
@@ -121,6 +119,6 @@ char	**map_val_to_export(char ***arr);
 t_export	*exp_stack_new(char *name, char *val);
 void		exp_stack_push(t_export **stack, t_export *node);
 void		exp_stack_clear(t_export **head);
-int			is_export_bef(char *name);
+void		exp_stack_remove_if(t_export **head, char *data_ref);
 
 #endif
