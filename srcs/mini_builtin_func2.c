@@ -53,9 +53,7 @@ int	unset_env(char *arg)
 		exp_stack_remove_if(&g_var.export, arg);
 		return (EXIT_SUCCESS);
 	}
-	ft_putstr_fd("unset: `", STDERR_FILENO);
-	ft_putstr_fd(arg, STDERR_FILENO);
-	ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
+	put_error("unset", arg, EXIT_FAILURE);
 	return (EXIT_FAILURE);
 }
 

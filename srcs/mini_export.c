@@ -44,9 +44,7 @@ int	export_env(char *arg)
 			mini_export_setenv(arg);
 		return (EXIT_SUCCESS);
 	}
-	ft_putstr_fd("export: `", STDERR_FILENO);
-	ft_putstr_fd(arg, STDERR_FILENO);
-	ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
+	put_error("export", arg, EXIT_FAILURE);
 	return (EXIT_FAILURE);
 }
 

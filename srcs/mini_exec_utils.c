@@ -54,6 +54,7 @@ int	wait_pipe(t_pipex p)
 	{
 		if (waitpid(p.proc[i++], &status, 0) < 0)
 			perror("waitpid");
+		//waitpid(p.proc[i++], &status, 0);
 	}
 	return (WEXITSTATUS(status));
 }

@@ -11,6 +11,8 @@ char	*ft_strcpy(char *dest, const char *src);
 /* utils_instr.c */
 int	    count_in_str(char *str, char c);
 int	    pos_in_str(char *str, char c);
+int 	ft_isspace(char c);
+int	    ft_isspace_str(char *s);
 
 /* utils_2d.c */
 int		size_2d(char **arr);

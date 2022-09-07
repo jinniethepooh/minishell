@@ -30,3 +30,19 @@ int	pos_in_str(char *str, char c)
 	}
 	return (pos);
 }
+
+int	ft_isspace(char c)
+{
+	return (c == ' ' || c == '\t' || c == '\v' || c == '\f' || c == '\r');
+}
+
+int	ft_isspace_str(char *s)
+{
+	while (*s)
+	{
+		if (!ft_isspace(*s))
+			return (0);
+		s++;
+	}
+	return (1);
+}
