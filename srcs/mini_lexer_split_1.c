@@ -7,8 +7,8 @@ static int	ft_strlen_untilc(const char *s, char c)
 	i = 0;
 	while (s[i] && s[i] != c)
 	{
-        if (ft_isquotes(s[i]) && s[i + 1])
-            i += (ft_loop_until(&s[i + 1], s[i], 0) + 1);
+		if (ft_isquotes(s[i]) && s[i + 1])
+			i += (ft_loop_until(&s[i + 1], s[i], 0) + 1);
 		i++;
 	}
 	return (i);
@@ -41,12 +41,12 @@ static int	ft_piece(char *s, char c)
 		piece++;
 	while (*s)
 	{
-        if (ft_isquotes(*s))
-            s += (ft_loop_until(s + 1, *s, 0) + 1);
+		if (ft_isquotes(*s))
+			s += (ft_loop_until(s + 1, *s, 0) + 1);
 		if (*s == c && *(s + 1) != c && *(s + 1))
 			piece++;
-        if (*s)
-            s++;
+		if (*s)
+			s++;
 	}
 	return (piece);
 }
@@ -54,7 +54,7 @@ static int	ft_piece(char *s, char c)
 char	**pipe_split(char const *s, char c)
 {
 	int		i;
-    int     j;
+	int	 j;
 	char	*cpy;
 	char	**arr;
 
@@ -62,15 +62,15 @@ char	**pipe_split(char const *s, char c)
 	cpy = ft_strdup(s);
 	arr = malloc((ft_piece(cpy, c) + 1) * sizeof(char *));
 	j = ft_loop_until(cpy, c, 1);
-    while (cpy[j])
+	while (cpy[j])
 	{
-        if (cpy[j] != c)
-        {
+		if (cpy[j] != c)
+		{
 			arr[i++] = ft_strdup_untilc(&cpy[j], c);
-            j += ft_strlen_untilc(&cpy[j], c);
-        }
-        else
-            j += ft_loop_until(&cpy[j], c, 1);
+			j += ft_strlen_untilc(&cpy[j], c);
+		}
+		else
+			j += ft_loop_until(&cpy[j], c, 1);
 	}
 	arr[i] = 0;
 	free(cpy);
