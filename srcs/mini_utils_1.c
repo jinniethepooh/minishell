@@ -39,8 +39,9 @@ int  ft_loop_until(const char *s, char c, int flag)
 	}
 	else
 	{
-		while (s[len] && s[len] != c)
-			++len;
+		return (pos_in_str((char *)s, c));
+		//while (s[len] && s[len] != c)
+		//	++len;
 	}
 	return (len);
 }

@@ -16,7 +16,7 @@ char	**map_val_to_redir(t_command *cmd)
 		if (ft_strcmp(mode, "<<") == 0 || ft_strcmp(mode, "<") == 0
 			|| ft_strcmp(mode, ">>") == 0 || ft_strcmp(mode, ">") == 0)
 		{
-			mini_redir(cmd, mode, (*args)[i + 1]);
+			mini_redir(cmd, i);
 			rm_from_2d(args, i + 1);
 			rm_from_2d(args, i);
 			continue ;
@@ -26,16 +26,20 @@ char	**map_val_to_redir(t_command *cmd)
 	return (*args);
 }
 
-void	mini_redir(t_command *c, char *mode, char *name)
+void	mini_redir(t_command *c, int i)
 {
 	t_pipex	p;
+	char	*mode;
+	char	*name;
 
+	mode = c->cmd_args[i];
+	name = c->cmd_args[i + 1];
 	if (ft_strcmp(mode, "<<") == 0)
 	{
 		p = mini_heredoc(name);
 		c->fd_in = dup(p.fd_end[0]);
 		close_pipe(p);
-		return ;
+		//return ;
 	}
 	else if (ft_strcmp(mode, "<") == 0)
 		c->fd_in = open(name, O_RDONLY);

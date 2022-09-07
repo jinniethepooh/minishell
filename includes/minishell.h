@@ -58,18 +58,22 @@ typedef struct s_shell
 	int			exit_status;
 }	t_shell;
 
-t_shell	g_var;
+extern t_shell	g_var;
 
 /* validator */
-int		ft_wcount(const char *s, char c);
-int		ft_isspace(char c);
 int		ft_isquotes(char c);
 int		ft_isredir(char c);
-int		ft_isvalid_pipe(void);
-int		ft_isvalid_quotes(void);
+int		is_input_valid(t_shell *sh);
 
 /* helper */
+int		ft_wcount(const char *s, char c);
 int 	ft_loop_until(const char *s, char c, int flag);
+void	put_error(char *title, char *token, int status);
+
+/* mini_init.c */
+t_shell	*shell_init(t_shell *sh, char **env);
+void	set_prompt(t_shell *sh);
+void	mini_add_history(t_shell *sh);
 
 /* mini_exit.c */
 void    mini_exit(t_shell *sh);
@@ -86,7 +90,7 @@ int		is_envname_valid(char *name);
 
 /* mini_redir.c */
 char	**map_val_to_redir(t_command *cmd);
-void	mini_redir(t_command *c, char *mode, char *name);
+void	mini_redir(t_command *c, int idx);
 t_pipex	mini_heredoc(char *eof);
 
 /* mini_exec.c */

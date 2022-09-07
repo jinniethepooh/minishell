@@ -8,8 +8,8 @@ static void	manage_cmd(t_command **cmd, char *raw_cmd)
 	(*cmd)->fd_in = STDIN_FILENO;
 	(*cmd)->fd_out = STDOUT_FILENO;
 	(*cmd)->cmd_args = cmd_split(raw_cmd, ' ');
-	map_val_to_redir(*cmd);
 	map_val_to_export(&(*cmd)->cmd_args);
+	map_val_to_redir(*cmd);
 	int j = -1;
 	while ((*cmd)->cmd_args[++j])
 		printf("%d) lex cmd [%s]\n", j, (*cmd)->cmd_args[j]);
