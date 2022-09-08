@@ -54,7 +54,7 @@ typedef struct s_shell
 	t_export	*export;
 	char		*from_rl;
 	char		**env;
-	int			sig_detect;
+	//int			sig_detect;
 	int			exit_status;
 }	t_shell;
 
@@ -77,6 +77,7 @@ void	mini_add_history(t_shell *sh);
 
 /* mini_exit.c */
 void    mini_exit(t_shell *sh);
+void	mini_free(t_shell *sh);
 void	clear_command(t_command **head);
 
 /* mini_cmd_utils.c */
