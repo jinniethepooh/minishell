@@ -11,6 +11,7 @@ int mini_exec(t_shell *sh)
 	cmd = sh->command;
 	if (get_num_cmd(sh) == 1)
 	{
+		map_val_to_export(&cmd->cmd_args);
 		if (size_2d(cmd->cmd_args) < 1)
 			return (EXIT_SUCCESS);
 		if (is_builtin(cmd->cmd_args))
@@ -24,11 +25,12 @@ static int	fork_proc(t_command *cmd, t_pipex px, int idx)
 {
 	if (!cmd)
 	{
+		signal(SIGINT, SIG_IGN);
 		close_pipe(px);
 		return (wait_pipe(px));
 	}
 	px.proc[idx] = fork();
-	signal_settings_child();
+	//signal_settings_child();
 	if (px.proc[idx] < 0)
 	{
 		perror("fork");
@@ -44,6 +46,8 @@ static int	fork_proc(t_command *cmd, t_pipex px, int idx)
 
 static void	child_proc(t_command *cmd, t_pipex px, int idx)
 {
+	signal(SIGINT, SIG_DFL);
+	map_val_to_export(&cmd->cmd_args);
 	if (cmd->fd_in < 0 || cmd->fd_out < 0)
 		exit(EXIT_FAILURE);
 	if (cmd->fd_in != STDIN_FILENO || idx == 0)

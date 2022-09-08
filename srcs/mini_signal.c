@@ -9,7 +9,7 @@ static void	echo_off(void)
 	tcsetattr(STDIN_FILENO, TCSANOW, &tio);
 }
 
-static void	respond_sig_child(int signum, siginfo_t *info, void *context)
+/*static void	respond_sig_child(int signum, siginfo_t *info, void *context)
 {
 	(void) context;
 	(void) info;
@@ -26,7 +26,7 @@ void	signal_settings_child(void)
 	sact.sa_flags = SA_SIGINFO;
 	sact.sa_sigaction = respond_sig_child;
 	sigaction(SIGINT, &sact, NULL);
-}
+}*/
 
 static void	respond_sig(int signum, siginfo_t *info, void *context)
 {
@@ -35,7 +35,7 @@ static void	respond_sig(int signum, siginfo_t *info, void *context)
 
 	if (signum == SIGINT)
 	{
-		g_var.sig_detect = 1;
+		//g_var.sig_detect = 1;
 		ioctl(STDIN_FILENO, TIOCSTI, "\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
