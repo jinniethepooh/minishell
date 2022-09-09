@@ -12,6 +12,8 @@ int mini_exec(t_shell *sh)
 	if (get_num_cmd(sh) == 1)
 	{
 		map_val_to_export(&cmd->cmd_args);
+		if (!map_val_to_redir(cmd))
+			return (EXIT_FAILURE);
 		if (size_2d(cmd->cmd_args) < 1)
 			return (EXIT_SUCCESS);
 		if (is_builtin(cmd->cmd_args))
@@ -30,7 +32,6 @@ static int	fork_proc(t_command *cmd, t_pipex px, int idx)
 		return (wait_pipe(px));
 	}
 	px.proc[idx] = fork();
-	//signal_settings_child();
 	if (px.proc[idx] < 0)
 	{
 		perror("fork");
@@ -38,6 +39,7 @@ static int	fork_proc(t_command *cmd, t_pipex px, int idx)
 	}
 	else if (px.proc[idx] == 0)
 	{
+		signal(SIGINT, SIG_DFL);
 		child_proc(cmd, px, idx);
 		exit(EXIT_SUCCESS);
 	}
@@ -46,9 +48,9 @@ static int	fork_proc(t_command *cmd, t_pipex px, int idx)
 
 static void	child_proc(t_command *cmd, t_pipex px, int idx)
 {
-	signal(SIGINT, SIG_DFL);
 	map_val_to_export(&cmd->cmd_args);
-	if (cmd->fd_in < 0 || cmd->fd_out < 0)
+	if (!map_val_to_redir(cmd))
+	//if (cmd->fd_in < 0 || cmd->fd_out < 0)
 		exit(EXIT_FAILURE);
 	if (cmd->fd_in != STDIN_FILENO || idx == 0)
 		dup2(cmd->fd_in, STDIN_FILENO);

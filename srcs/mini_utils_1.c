@@ -63,5 +63,11 @@ void	put_error(char *title, char *token, int status)
 		ft_putstr_fd(token, STDERR_FILENO);
 		ft_putstr_fd("'", STDERR_FILENO);
 	}
+	else if (status == 'h')
+	{
+		ft_putstr_fd("warning: here-document delimited by end-of-file (wanted `", STDERR_FILENO);
+		ft_putstr_fd(token, STDERR_FILENO);
+		ft_putstr_fd("')", STDERR_FILENO);
+	}
 	ft_putstr_fd("\n", STDERR_FILENO);
 }

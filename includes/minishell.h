@@ -90,9 +90,10 @@ char	*mini_getenv(char *name);
 int		is_envname_valid(char *name);
 
 /* mini_redir.c */
-char	**map_val_to_redir(t_command *cmd);
-void	mini_redir(t_command *c, int idx);
-t_pipex	mini_heredoc(char *eof);
+int		map_val_to_redir(t_command *cmd);
+int		mini_redir(t_command *c, int idx);
+int		map_args_to_heredoc(t_command *cmd);
+int		mini_heredoc(t_command *cmd, char *eof);
 
 /* mini_exec.c */
 int 	mini_exec(t_shell *sh);
