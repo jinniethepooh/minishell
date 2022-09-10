@@ -10,7 +10,6 @@ int	 main(int argc, char **argv, char **env)
 	while (1)
 	{
 		set_prompt(&g_var);
-		//g_var.sig_detect = 0;
 		g_var.from_rl = readline(g_var.prompt);
 		if (g_var.from_rl == NULL)
 			break ;
@@ -22,8 +21,6 @@ int	 main(int argc, char **argv, char **env)
 			if (g_var.exit_status != EXIT_SUCCESS)
 				continue ;
 			g_var.exit_status = mini_exec(&g_var);
-			//if (g_var.sig_detect)
-			//	g_var.exit_status = EXIT_SIGINT;
 			signal_settings();
 		}
 		free(g_var.prompt);

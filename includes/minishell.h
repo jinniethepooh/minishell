@@ -66,7 +66,6 @@ int		ft_isredir(char c);
 int		is_input_valid(t_shell *sh);
 
 /* helper */
-int		ft_wcount(const char *s, char c);
 int 	ft_loop_until(const char *s, char c, int flag);
 void	put_error(char *title, char *token, int status);
 

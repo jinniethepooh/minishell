@@ -9,24 +9,39 @@ static void	echo_off(void)
 	tcsetattr(STDIN_FILENO, TCSANOW, &tio);
 }
 
-/*static void	respond_sig_child(int signum, siginfo_t *info, void *context)
+int     sig_exit_child(int signum)
 {
-	(void) context;
-	(void) info;
-
-	if (signum == SIGINT)
-		g_var.sig_detect = 1;
+        if (signum == SIGINT)
+                return (EXIT_SIGINT);
+        return (EXIT_SIGQUIT);
 }
 
-void	signal_settings_child(void)
-{
-	struct sigaction	sact;
+// static void	respond_sig_child(int signum, siginfo_t *info, void *context)
+// {
+// 	(void) context;
+// 	(void) info;
 
-	sigemptyset(&sact.sa_mask);
-	sact.sa_flags = SA_SIGINFO;
-	sact.sa_sigaction = respond_sig_child;
-	sigaction(SIGINT, &sact, NULL);
-}*/
+// 	if (signum == SIGINT)
+//         {
+//                 signal(SIGINT, SIG_IGN);
+// 		g_var.sig_detect = 1;
+//                 signal(SIGINT, SIG_DFL);
+//         }
+// 	else if (signum == SIGQUIT)
+//         {
+//                 signal(SIGQUIT, SIG_IGN);
+//         }
+// }
+
+// void	signal_settings_child(void)
+// {
+// 	struct sigaction	sact;
+
+// 	sigemptyset(&sact.sa_mask);
+// 	sact.sa_flags = SA_SIGINFO;
+// 	sact.sa_sigaction = respond_sig_child;
+// 	sigaction(SIGINT, &sact, NULL);
+// }
 
 static void	respond_sig(int signum, siginfo_t *info, void *context)
 {

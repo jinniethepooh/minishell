@@ -1,22 +1,5 @@
 #include "minishell.h"
 
-int	ft_wcount(const char *s, char c)
-{
-	int	count;
-
-	count = 0;
-	while (*s)
-	{
-		while (*s == c)
-			++s;
-		if (*s != c && *s)
-			++count;
-		while (*s != c && *s)
-			++s;
-	}
-	return (count);
-}
-
 int	ft_isquotes(char c)
 {
 	return (c == '\'' || c == '"');
@@ -38,18 +21,14 @@ int  ft_loop_until(const char *s, char c, int flag)
 			++len;
 	}
 	else
-	{
 		return (pos_in_str((char *)s, c));
-		//while (s[len] && s[len] != c)
-		//	++len;
-	}
 	return (len);
 }
 
 void	put_error(char *title, char *token, int status)
 {
 	g_var.exit_status = status;
-	ft_putstr_fd("tinyshell: ", STDERR_FILENO);
+	ft_putstr_fd("tinyshell: "RED, STDERR_FILENO);
 	if (status == EXIT_FAILURE)
 	{
 		ft_putstr_fd(title, STDERR_FILENO);
