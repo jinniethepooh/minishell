@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static int	ft_strlen_untilc(const char *s, char c)
+static int	ft_piece_loop(const char *s, char c)
 {
 	int	i;
 
@@ -12,24 +12,6 @@ static int	ft_strlen_untilc(const char *s, char c)
 		i++;
 	}
 	return (i);
-}
-
-static char	*ft_strdup_untilc(const char *s, char c)
-{
-	char	*str;
-	int		i;
-	int		len;
-
-	i = 0;
-	len = ft_strlen_untilc(s, c) + 1;
-	str = (char *)malloc(len * sizeof(char));
-	while (s[i] && i < len - 1)
-	{
-		str[i] = s[i];
-		i++;
-	}
-	str[i] = 0;
-	return (str);
 }
 
 static int	ft_piece(char *s, char c)
@@ -51,6 +33,24 @@ static int	ft_piece(char *s, char c)
 	return (piece);
 }
 
+static char	*ft_strdup_untilc(const char *s, char c)
+{
+	char	*str;
+	int		i;
+	int		len;
+
+	i = 0;
+	len = ft_piece_loop(s, c) + 1;
+	str = (char *)malloc(len * sizeof(char));
+	while (s[i] && i < len - 1)
+	{
+		str[i] = s[i];
+		i++;
+	}
+	str[i] = 0;
+	return (str);
+}
+
 char	**pipe_split(char const *s, char c)
 {
 	int		i;
@@ -67,7 +67,7 @@ char	**pipe_split(char const *s, char c)
 		if (cpy[j] != c)
 		{
 			arr[i++] = ft_strdup_untilc(&cpy[j], c);
-			j += ft_strlen_untilc(&cpy[j], c);
+			j += ft_piece_loop(&cpy[j], c);
 		}
 		else
 			j += ft_loop_until(&cpy[j], c, 1);
