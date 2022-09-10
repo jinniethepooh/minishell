@@ -54,7 +54,7 @@ typedef struct s_shell
 	t_export	*export;
 	char		*from_rl;
 	char		**env;
-	//int			sig_detect;
+	int			sig_detect;
 	int			exit_status;
 }	t_shell;
 

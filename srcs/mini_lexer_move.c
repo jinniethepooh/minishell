@@ -25,7 +25,7 @@ static int  get_var_move(char *s)
 	}
 }
 
-int  get_cmd_move(char *s, int flag)
+int	get_cmd_move(char *s, int flag)
 {
 	int	len;
 

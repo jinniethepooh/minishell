@@ -35,7 +35,7 @@ static void	respond_sig(int signum, siginfo_t *info, void *context)
 
 	if (signum == SIGINT)
 	{
-		//g_var.sig_detect = 1;
+		g_var.sig_detect = 1;
 		ioctl(STDIN_FILENO, TIOCSTI, "\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);

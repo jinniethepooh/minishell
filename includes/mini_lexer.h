@@ -10,15 +10,8 @@ char	**pipe_split(char const *s, char c);
 /* mini_lexer_split_2.c - split command */
 char	**cmd_split(char const *s, char c);
 
-/* mini_cleaner_cmd.c - main cleaner */
+/* mini_cleaner.c - main cleaner */
 char    **cmd_cleaner(char **arr);
-void    *cmd_cleaner_loop(char *src, int flag);
-
-/* mini_cleaner_quotes.c - quote cleaner */
-char    *cmd_cleaner_quotes(char *src);
-
-/* mini_cleaner_var.c - var cleaner */
-char    *cmd_cleaner_var(char *src);
 
 /* mini_lexer_move.c - mover */
 int     get_var_skip(char c);
