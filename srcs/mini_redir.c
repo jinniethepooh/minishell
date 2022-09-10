@@ -116,17 +116,20 @@ int	mini_heredoc(t_command *cmd, char *eof)
 	}
 	else if (p.proc[0] == 0)
 	{
-		signal(SIGINT, SIG_DFL);
+		signal_settings_child(1);
+		// signal(SIGINT, SIG_DFL);
 		heredoc_child_proc(p, eof);
 		exit(EXIT_SUCCESS);
 	}
-	signal(SIGINT, SIG_IGN);
+	signal_settings_child(0);
+	// signal(SIGINT, SIG_IGN);
 	cmd->fd_in = dup(p.fd_end[0]);
 	close_pipe(p);
 	waitpid(p.proc[0], &status, 0);
 	if (WIFSIGNALED(status))
-		if (WTERMSIG(status) == SIGINT)
-			return (EXIT_SIGINT);
+		if (WTERMSIG(status) == SIGINT || WTERMSIG(status) == SIGQUIT)
+			return (signal_exit_child(WTERMSIG(status)));
+			// return (EXIT_SIGINT);
 	return (WEXITSTATUS(status));
 	//return (p);
 }

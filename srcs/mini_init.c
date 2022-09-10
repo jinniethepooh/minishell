@@ -54,9 +54,7 @@ void	set_prompt(t_shell *sh)
 	free(cwd_color);
 	sh->prompt = ft_strjoin(temp, "$ ");
 	free(temp);
-	if (sh->sig_detect)
-		sh->exit_status = EXIT_SIGINT;
-	sh->sig_detect = 0;
+	signal_settings();
 }
 
 void	 mini_add_history(t_shell *sh)

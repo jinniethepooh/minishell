@@ -24,16 +24,14 @@ LIBC = ar rc
 RM = rm
 NORM = Norminette
 
-all: compile $(NAME)
+all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(LIBC) $@ $(OBJS)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HDRS)
-	$(CC) $(CFLAGS) $(HDR_INC) -c $< -o $@
-
-compile:
 	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(HDR_INC) -c $< -o $@
 
 norm:
 	@$(NORM) -R CheckForbiddenSourceHeader $(SRCS) | grep -v Norme -B1 || true
@@ -47,4 +45,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re compile norm
+.PHONY: all clean fclean re norm

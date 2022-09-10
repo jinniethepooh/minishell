@@ -3,9 +3,9 @@
 
 # define EXIT_SIGINT 130
 # define EXIT_SIGQUIT 131
-# define CHILD_PROC 0
 
-void    signal_settings_child(void);
+int     signal_exit_child(int signum);
+void    signal_settings_child(int mode);
 void    signal_settings(void);
 
 #endif

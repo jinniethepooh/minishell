@@ -21,7 +21,6 @@ int	 main(int argc, char **argv, char **env)
 			if (g_var.exit_status != EXIT_SUCCESS)
 				continue ;
 			g_var.exit_status = mini_exec(&g_var);
-			signal_settings();
 		}
 		free(g_var.prompt);
 		free(g_var.from_rl);

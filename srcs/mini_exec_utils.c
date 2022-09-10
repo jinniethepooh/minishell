@@ -63,8 +63,10 @@ int	wait_pipe(t_pipex p)
 			printf("%d\n", WTERMSIG(status));*/
 	}
 	if (WIFSIGNALED(status))
-		if (WTERMSIG(status) == SIGINT)
-			return (EXIT_SIGINT);
+		if (WTERMSIG(status) == SIGINT || WTERMSIG(status) == SIGQUIT)
+			return (signal_exit_child(WTERMSIG(status)));
+		// if (WTERMSIG(status) == SIGINT)
+		// 	return (EXIT_SIGINT);
 	return (WEXITSTATUS(status));
 }
 

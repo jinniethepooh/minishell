@@ -30,7 +30,7 @@ CFLAGS = -g -Wall -Wextra -Werror
 RM = rm
 NORM = Norminette
 
-all: compile $(NAME)
+all: lib $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $@ $(LIB_BINARY)
@@ -39,13 +39,11 @@ $(NAME): $(OBJS)
 bonus: all
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(HDR_INC) $(LIB_INC) -c $< -o $@
 
-compile: lib
-	@mkdir -p $(OBJ_DIR)
-
 lib:
-	$(foreach f, $(LIB_DIR), make -C $f;)
+	@make -C $(LIB_DIR)
 
 norm:
 	$(foreach f, $(LIB_DIR), make norm -C $f;)
@@ -63,4 +61,4 @@ fclean:
 
 re: fclean all
 
-.PHONY: all clean fclean re compile lib norm bonus
+.PHONY: all clean fclean re lib norm bonus

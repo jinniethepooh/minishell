@@ -27,7 +27,8 @@ static int	fork_proc(t_command *cmd, t_pipex px, int idx)
 {
 	if (!cmd)
 	{
-		signal(SIGINT, SIG_IGN);
+		signal_settings_child(0);
+		// signal(SIGINT, SIG_IGN);
 		close_pipe(px);
 		return (wait_pipe(px));
 	}
@@ -39,7 +40,8 @@ static int	fork_proc(t_command *cmd, t_pipex px, int idx)
 	}
 	else if (px.proc[idx] == 0)
 	{
-		signal(SIGINT, SIG_DFL);
+		signal_settings_child(1);
+		// signal(SIGINT, SIG_DFL);
 		child_proc(cmd, px, idx);
 		exit(EXIT_SUCCESS);
 	}
