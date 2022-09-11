@@ -16,7 +16,7 @@ int mini_exec(t_shell *sh)
 			return (EXIT_FAILURE);
 		if (size_2d(cmd->cmd_args) < 1)
 			return (EXIT_SUCCESS);
-		if (is_builtin(cmd->cmd_args))
+		if (is_builtin(cmd->cmd_args[0]) > 3)
 			return (call_builtin(cmd));
 	}
 	px = setup_pipe(get_num_cmd(sh) - 1);

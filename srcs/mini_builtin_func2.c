@@ -5,11 +5,11 @@ int	builtin_export(char **args)
 	int	status;
 
 	status = EXIT_SUCCESS;
-	if (!args[1])
+	/*if (!args[1])
 	{
 		print_2d(g_var.env, '\n');
 		printf("\n");
-	}
+	}*/
 	while (*++args)
 	{
 		if (status == EXIT_SUCCESS)
@@ -56,4 +56,3 @@ int	unset_env(char *arg)
 	put_error("unset", arg, EXIT_FAILURE);
 	return (EXIT_FAILURE);
 }
-

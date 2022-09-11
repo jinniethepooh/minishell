@@ -104,7 +104,7 @@ void	close_pipe(t_pipex p);
 int		wait_pipe(t_pipex p);
 
 /* mini_builtin.c */
-int		is_builtin(char **args);
+int		is_builtin(char *arg);
 int		call_builtin(t_command *c);
 
 /* mini_builtin_func.c */

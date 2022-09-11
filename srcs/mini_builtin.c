@@ -22,18 +22,18 @@ static void	set_builtin_func(int (**b_func)())
 	b_func[6] = &builtin_exit;
 }
 
-int	is_builtin(char **args)
+int	is_builtin(char *arg)
 {
 	char	*b_str[7];
 	int		i;
 
-	if (args)
+	if (arg)
 	{
 		i = 0;
 		set_builtin_str(b_str);
 		while (i < 7)
 		{
-			if (ft_strcmp(args[0], b_str[i]) == 0)
+			if (ft_strcmp(arg, b_str[i]) == 0)
 				return (i + 1);
 			i++;
 		}

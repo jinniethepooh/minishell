@@ -17,7 +17,7 @@ t_pipex	setup_pipe(int n_pipe)
 
 void	exec_pipe(t_command *c)
 {
-	if (!is_builtin(c->cmd_args))
+	if (!is_builtin(c->cmd_args[0]))
 	{
 		if (!c->cmd_path)
 		{
