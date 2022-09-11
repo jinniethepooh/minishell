@@ -2,8 +2,10 @@
 
 static char	*set_str_color(char *src, int start, char *color);
 
-t_shell	*shell_init(t_shell *sh, char **env)
+t_shell	*shell_init(t_shell *sh, int argc, char **argv, char **env)
 {
+	(void)argc;
+	(void)argv;
 	signal_settings();
 	sh->env = dup_2d(env);
 	sh->usr = set_str_color(mini_getenv("USER"), 0, BCYN);

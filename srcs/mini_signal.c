@@ -19,16 +19,15 @@ int	signal_exit_child(int signum)
 void	signal_settings_child(int mode)
 {
 	if (mode == 0)
-    {
-        signal(SIGINT, SIG_IGN);
-        signal(SIGQUIT, SIG_IGN);
-    }
-    if (mode == 1)
-    //if (mode == 2)
-    {
-        signal(SIGINT, SIG_DFL);
-        signal(SIGQUIT, SIG_DFL);
-    }
+	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
+	}
+	if (mode == 1)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+	}
 }
 
 static void	respond_sig(int signum, siginfo_t *info, void *context)
@@ -45,6 +44,7 @@ static void	respond_sig(int signum, siginfo_t *info, void *context)
 	else if (signum == SIGQUIT)
 	{
 		rl_on_new_line();
+		rl_replace_line("", 0);
 		rl_redisplay();
 	}
 }

@@ -62,6 +62,7 @@ extern t_shell	g_var;
 
 /* validator */
 int			ft_isquotes(char c);
+int			redir_checker(char *str);
 int			ft_isredir(char c);
 int			is_input_valid(t_shell *sh);
 
@@ -70,7 +71,7 @@ int			ft_loop_until(const char *s, char c, int flag);
 void		put_error(char *title, char *token, int status);
 
 /* mini_init.c */
-t_shell		*shell_init(t_shell *sh, char **env);
+t_shell		*shell_init(t_shell *sh, int argc, char **argv, char **env);
 void		set_prompt(t_shell *sh);
 void		mini_add_history(t_shell *sh);
 
@@ -104,8 +105,8 @@ void		close_pipe(t_pipex p);
 int			wait_pipe(t_pipex p);
 
 /* mini_builtin.c */
-int		is_builtin(char *arg);
-int		call_builtin(t_command *c);
+int			is_builtin(char *arg);
+int			call_builtin(t_command *c);
 
 /* mini_builtin_func.c */
 int			builtin_echo(char **args);

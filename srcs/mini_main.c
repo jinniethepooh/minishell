@@ -4,9 +4,7 @@ t_shell	g_var;
 
 int	main(int argc, char **argv, char **env)
 {
-	(void)argc;
-	(void)argv;
-	shell_init(&g_var, env);
+	shell_init(&g_var, argc, argv, env);
 	while (1)
 	{
 		set_prompt(&g_var);
@@ -18,7 +16,8 @@ int	main(int argc, char **argv, char **env)
 		{
 			get_cmd();
 			g_var.exit_status = map_args_to_heredoc(g_var.command);
-			if (g_var.exit_status != EXIT_SUCCESS)
+			if (g_var.exit_status != EXIT_SUCCESS || \
+				!ft_strcmp(g_var.from_rl, "\0"))
 				continue ;
 			g_var.exit_status = mini_exec(&g_var);
 		}

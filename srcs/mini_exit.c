@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void    mini_exit(t_shell *sh)
+void	mini_exit(t_shell *sh)
 {
 	printf("... exiting hell, "BRED"to a deeper!\n"RES);
 	mini_free(sh);

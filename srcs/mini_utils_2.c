@@ -80,16 +80,17 @@ static int	is_redir_valid(char *from_rl)
 			while (*str && ft_isspace(*str))
 				str++;
 			if (!*str || *str == '|' || count_in_str("><", *str) > 0)
-			{
-				if (!*str)
-					put_error(NULL, "newline", 2);
-				else
-				{
-					*(str + 1) = 0;
-					put_error(NULL, str, 2);
-				}
-				return (0);
-			}
+				return (redir_checker(str));
+			// {
+			// 	if (!*str)
+			// 		put_error(NULL, "newline", 2);
+			// 	else
+			// 	{
+			// 		*(str + 1) = 0;
+			// 		put_error(NULL, str, 2);
+			// 	}
+			// 	return (0);
+			// }
 			str = ft_strchr(str, *set);
 		}
 		set++;
