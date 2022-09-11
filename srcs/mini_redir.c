@@ -1,7 +1,7 @@
 #include "minishell.h"
 
-int	map_val_to_redir(t_command *cmd)
-{ 
+int	map_args_to_redir(t_command *cmd)
+{
 	char	*mode;
 	int		i;
 
@@ -21,7 +21,6 @@ int	map_val_to_redir(t_command *cmd)
 				continue ;
 			}
 			return (0);
-			// put_error
 		}
 		i++;
 	}
@@ -35,8 +34,6 @@ int	mini_redir(t_command *c, int i)
 
 	mode = c->cmd_args[i];
 	name = c->cmd_args[i + 1];
-	//if (!name)
-	//	return ();
 	if (ft_strcmp(mode, "<") == 0)
 		c->fd_in = open(name, O_RDONLY);
 	else if (ft_strcmp(mode, ">>") == 0)
@@ -117,19 +114,15 @@ int	mini_heredoc(t_command *cmd, char *eof)
 	else if (p.proc[0] == 0)
 	{
 		signal_settings_child(1);
-		// signal(SIGINT, SIG_DFL);
 		heredoc_child_proc(p, eof);
 		exit(EXIT_SUCCESS);
 	}
 	signal_settings_child(0);
-	// signal(SIGINT, SIG_IGN);
 	cmd->fd_in = dup(p.fd_end[0]);
 	close_pipe(p);
 	waitpid(p.proc[0], &status, 0);
 	if (WIFSIGNALED(status))
 		if (WTERMSIG(status) == SIGINT || WTERMSIG(status) == SIGQUIT)
 			return (signal_exit_child(WTERMSIG(status)));
-			// return (EXIT_SIGINT);
 	return (WEXITSTATUS(status));
-	//return (p);
 }

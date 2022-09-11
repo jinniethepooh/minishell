@@ -89,7 +89,7 @@ char	*mini_getenv(char *name);
 int		is_envname_valid(char *name);
 
 /* mini_redir.c */
-int		map_val_to_redir(t_command *cmd);
+int		map_args_to_redir(t_command *cmd);
 int		mini_redir(t_command *c, int idx);
 int		map_args_to_heredoc(t_command *cmd);
 int		mini_heredoc(t_command *cmd, char *eof);
@@ -121,7 +121,7 @@ int		unset_env(char *arg);
 
 /* mini_export.c */
 int		export_env(char *arg);
-char	**map_val_to_export(char ***arr);
+char	**map_args_to_export(char ***arr);
 
 /* mini_export_utils.c */
 t_export	*exp_stack_new(char *name, char *val);
