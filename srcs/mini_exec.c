@@ -51,6 +51,8 @@ static void	child_proc(t_command *cmd, t_pipex px, int idx)
 	map_args_to_export(&cmd->cmd_args);
 	if (!map_args_to_redir(cmd))
 		exit(EXIT_FAILURE);
+	if (size_2d(cmd->cmd_args) < 1)
+		exit(EXIT_SUCCESS);
 	if (cmd->fd_in != STDIN_FILENO || idx == 0)
 		dup2(cmd->fd_in, STDIN_FILENO);
 	else

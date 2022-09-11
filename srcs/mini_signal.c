@@ -23,7 +23,8 @@ void	signal_settings_child(int mode)
         signal(SIGINT, SIG_IGN);
         signal(SIGQUIT, SIG_IGN);
     }
-    if (mode == 2)
+    if (mode == 1)
+    //if (mode == 2)
     {
         signal(SIGINT, SIG_DFL);
         signal(SIGQUIT, SIG_DFL);

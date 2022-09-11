@@ -48,5 +48,5 @@ void	put_error(char *title, char *token, int status)
 		ft_putstr_fd(token, STDERR_FILENO);
 		ft_putstr_fd("')", STDERR_FILENO);
 	}
-	ft_putstr_fd("\n", STDERR_FILENO);
+	ft_putstr_fd("\n"RES, STDERR_FILENO);
 }

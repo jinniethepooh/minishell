@@ -11,8 +11,8 @@ int	map_args_to_redir(t_command *cmd)
 	while (cmd->cmd_args[i])
 	{
 		mode = cmd->cmd_args[i];
-		if (ft_strcmp(mode, "<") == 0 || ft_strcmp(mode, ">>") == 0
-			|| ft_strcmp(mode, ">") == 0)
+		if (ft_strcmp(mode, "<<") == 0 || ft_strcmp(mode, "<") == 0
+			|| ft_strcmp(mode, ">>") == 0 || ft_strcmp(mode, ">") == 0)
 		{
 			if (mini_redir(cmd, i))
 			{
