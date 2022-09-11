@@ -1,16 +1,16 @@
 #include "minishell.h"
 
-int get_var_skip(char c)
+int	get_var_skip(char c)
 {
 	return (ft_isalpha(c) || c == '_');
 }
 
-static int  get_quo_move(char *s)
+static int	get_quo_move(char *s)
 {
 	return (ft_loop_until(s + 1, *s, 0) + 2);
 }
 
-static int  get_var_move(char *s)
+static int	get_var_move(char *s)
 {
 	int	len;
 

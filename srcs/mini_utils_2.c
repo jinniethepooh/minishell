@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static int quotes_checker(char *from_rl)
+static int	quotes_checker(char *from_rl)
 {
 	int	i;
 	int	curr_q;

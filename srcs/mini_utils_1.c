@@ -10,7 +10,7 @@ int	ft_isredir(char c)
 	return (c == '<' || c == '>');
 }
 
-int  ft_loop_until(const char *s, char c, int flag)
+int	ft_loop_until(const char *s, char c, int flag)
 {
 	int	len;
 
@@ -44,7 +44,8 @@ void	put_error(char *title, char *token, int status)
 	}
 	else if (status == 'h')
 	{
-		ft_putstr_fd("warning: here-document delimited by end-of-file (wanted `", STDERR_FILENO);
+		ft_putstr_fd("warning: here-document delimited ", STDERR_FILENO);
+		ft_putstr_fd("by end-of-file (wanted `", STDERR_FILENO);
 		ft_putstr_fd(token, STDERR_FILENO);
 		ft_putstr_fd("')", STDERR_FILENO);
 	}

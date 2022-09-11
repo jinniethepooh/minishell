@@ -19,7 +19,7 @@ static void	*get_prompt_dir(char *cwd, char *temp)
 {
 	if (ft_strncmp(cwd + 1, temp, ft_strlen(temp)) == 0)
 	{
-		temp = ft_strjoin(":~", ft_strnstr(cwd + 1, temp,
+		temp = ft_strjoin(":~", ft_strnstr(cwd + 1, temp, \
 			ft_strlen(cwd + 1)) + ft_strlen(temp));
 		free(cwd);
 		cwd = temp;
@@ -57,7 +57,7 @@ void	set_prompt(t_shell *sh)
 	signal_settings();
 }
 
-void	 mini_add_history(t_shell *sh)
+void	mini_add_history(t_shell *sh)
 {
 	if (!ft_isspace_str(sh->from_rl))
 		add_history(sh->from_rl);

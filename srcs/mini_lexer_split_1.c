@@ -54,7 +54,7 @@ static char	*ft_strdup_untilc(const char *s, char c)
 char	**pipe_split(char const *s, char c)
 {
 	int		i;
-	int	 j;
+	int		j;
 	char	*cpy;
 	char	**arr;
 

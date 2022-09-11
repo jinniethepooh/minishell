@@ -61,67 +61,67 @@ typedef struct s_shell
 extern t_shell	g_var;
 
 /* validator */
-int		ft_isquotes(char c);
-int		ft_isredir(char c);
-int		is_input_valid(t_shell *sh);
+int			ft_isquotes(char c);
+int			ft_isredir(char c);
+int			is_input_valid(t_shell *sh);
 
 /* helper */
-int 	ft_loop_until(const char *s, char c, int flag);
-void	put_error(char *title, char *token, int status);
+int			ft_loop_until(const char *s, char c, int flag);
+void		put_error(char *title, char *token, int status);
 
 /* mini_init.c */
-t_shell	*shell_init(t_shell *sh, char **env);
-void	set_prompt(t_shell *sh);
-void	mini_add_history(t_shell *sh);
+t_shell		*shell_init(t_shell *sh, char **env);
+void		set_prompt(t_shell *sh);
+void		mini_add_history(t_shell *sh);
 
 /* mini_exit.c */
-void    mini_exit(t_shell *sh);
-void	mini_free(t_shell *sh);
-void	clear_command(t_command **head);
+void		mini_exit(t_shell *sh);
+void		mini_free(t_shell *sh);
+void		clear_command(t_command **head);
 
 /* mini_cmd_utils.c */
-char	*set_cmd_path(t_command *c);
-int		get_num_cmd(t_shell *sh);
+char		*set_cmd_path(t_command *c);
+int			get_num_cmd(t_shell *sh);
 
 /* mini_env.c */
-int		mini_setenv(char *name, char *val);
-char	*mini_getenv(char *name);
-int		is_envname_valid(char *name);
+int			mini_setenv(char *name, char *val);
+char		*mini_getenv(char *name);
+int			is_envname_valid(char *name);
 
 /* mini_redir.c */
-int		map_args_to_redir(t_command *cmd);
-int		mini_redir(t_command *c, int idx);
-int		map_args_to_heredoc(t_command *cmd);
-int		mini_heredoc(t_command *cmd, char *eof);
+int			map_args_to_redir(t_command *cmd);
+int			mini_redir(t_command *c, int idx);
+int			map_args_to_heredoc(t_command *cmd);
+int			mini_heredoc(t_command *cmd, char *eof);
 
 /* mini_exec.c */
-int 	mini_exec(t_shell *sh);
+int			mini_exec(t_shell *sh);
 
 /* mini_exec_utils.c */
-t_pipex	setup_pipe(int n_pipe);
-void	exec_pipe(t_command *c);
-void	close_pipe(t_pipex p);
-int		wait_pipe(t_pipex p);
+t_pipex		setup_pipe(int n_pipe);
+void		exec_pipe(t_command *c);
+void		close_pipe(t_pipex p);
+int			wait_pipe(t_pipex p);
 
 /* mini_builtin.c */
 int		is_builtin(char *arg);
 int		call_builtin(t_command *c);
 
 /* mini_builtin_func.c */
-int		builtin_echo(char **args);
-int		builtin_cd(char **args);
-int		builtin_pwd(void);
-int		builtin_env(void);
-int		builtin_exit(void);
+int			builtin_echo(char **args);
+int			builtin_cd(char **args);
+int			builtin_pwd(void);
+int			builtin_env(void);
+int			builtin_exit(void);
 
 /* mini_builtin_func2.c */
-int		builtin_export(char **args);
-int		builtin_unset(char **args);
-int		unset_env(char *arg);
+int			builtin_export(char **args);
+int			builtin_unset(char **args);
+int			unset_env(char *arg);
 
 /* mini_export.c */
-int		export_env(char *arg);
-char	**map_args_to_export(char ***arr);
+int			export_env(char *arg);
+char		**map_args_to_export(char ***arr);
 
 /* mini_export_utils.c */
 t_export	*exp_stack_new(char *name, char *val);

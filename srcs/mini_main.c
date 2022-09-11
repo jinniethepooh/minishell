@@ -2,7 +2,7 @@
 
 t_shell	g_var;
 
-int	 main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **env)
 {
 	(void)argc;
 	(void)argv;

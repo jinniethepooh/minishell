@@ -2,18 +2,18 @@
 
 static void	echo_off(void)
 {
-	struct termios  tio;
+	struct termios	tio;
 
 	tcgetattr(STDIN_FILENO, &tio);
 	tio.c_lflag &= ~ECHOCTL;
 	tcsetattr(STDIN_FILENO, TCSANOW, &tio);
 }
 
-int     signal_exit_child(int signum)
+int	signal_exit_child(int signum)
 {
-    if (signum == SIGINT)
-        return (EXIT_SIGINT);
-    return (EXIT_SIGQUIT);
+	if (signum == SIGINT)
+		return (EXIT_SIGINT);
+	return (EXIT_SIGQUIT);
 }
 
 void	signal_settings_child(int mode)
@@ -35,7 +35,6 @@ static void	respond_sig(int signum, siginfo_t *info, void *context)
 {
 	(void) context;
 	(void) info;
-
 	if (signum == SIGINT)
 	{
 		g_var.sig_detect = 1;
@@ -55,7 +54,7 @@ void	signal_settings(void)
 	struct sigaction	sact;
 
 	if (g_var.sig_detect)
-        g_var.exit_status = EXIT_SIGINT;
+		g_var.exit_status = EXIT_SIGINT;
 	g_var.sig_detect = 0;
 	sigemptyset(&sact.sa_mask);
 	sact.sa_flags = SA_SIGINFO;

@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static int  ft_piece_loop(char *s, char c)
+static int	ft_piece_loop(char *s, char c)
 {
 	int	i;
 
@@ -19,11 +19,11 @@ static int  ft_piece_loop(char *s, char c)
 static int	ft_piece(char *s, char c)
 {
 	int	piece;
-	int i;
+	int	i;
 
 	piece = 0;
 	i = ft_loop_until(s, c, 1);
-  	while (s[i])
+	while (s[i])
 	{
 		if (s[i] != c)
 		{
@@ -77,5 +77,5 @@ char	**cmd_split(char const *s, char c)
 	}
 	arr[i] = 0;
 	free(cpy);
-	return(cmd_cleaner(arr));
+	return (cmd_cleaner(arr));
 }
