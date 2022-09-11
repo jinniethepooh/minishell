@@ -18,7 +18,7 @@ int	signal_exit_child(int signum)
 
 void	signal_settings_child(int mode)
 {
-    if (mode == 0)
+	if (mode == 0)
     {
         signal(SIGINT, SIG_IGN);
         signal(SIGQUIT, SIG_IGN);
