@@ -79,7 +79,7 @@ static int	is_redir_valid(char *from_rl)
 				str++;
 			while (*str && ft_isspace(*str))
 				str++;
-			if (!*str || count_in_str("><", *str) > 0)
+			if (!*str || *str == '|' || count_in_str("><", *str) > 0)
 			{
 				if (!*str)
 					put_error(NULL, "newline", 2);
