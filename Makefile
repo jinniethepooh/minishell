@@ -25,6 +25,11 @@ ifeq ($(shell uname), Linux)
 LIB_INC += -I/usr/include/
 endif
 
+ifeq ($(shell uname), Darwin)
+LIB_INC += -I/usr/local/opt/readline/include
+LIB_BINARY += -L/usr/local/opt/readline/lib
+endif
+
 CC = gcc
 CFLAGS = -g -Wall -Wextra -Werror
 RM = rm
