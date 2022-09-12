@@ -62,7 +62,7 @@ clean:
 fclean:
 	$(RM) -rf $(OBJ_DIR)
 	$(RM) -f $(NAME)
-	$(RM) -f $(NAME).dSYM
+	$(RM) -rf $(NAME).dSYM
 	$(foreach f, $(LIB_DIR), make fclean -C $f;)
 
 re: fclean all
