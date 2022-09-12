@@ -25,7 +25,7 @@ int	ft_loop_until(const char *s, char c, int flag)
 	return (len);
 }
 
-int		redir_checker(char *str)
+int	redir_checker(char *str)
 {
 	if (!*str)
 		put_error(NULL, "newline", 2);

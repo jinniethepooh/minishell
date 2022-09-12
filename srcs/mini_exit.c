@@ -4,13 +4,6 @@ void	mini_exit(t_shell *sh)
 {
 	printf("... exiting hell, "BRED"to a deeper!\n"RES);
 	mini_free(sh);
-	/*rl_clear_history();
-	free(sh->prompt);
-	free(sh->from_rl);
-	free(sh->usr);
-	free_2d(sh->env);
-	clear_command(&sh->command);
-	exp_stack_clear(&sh->export);*/
 	exit(EXIT_SUCCESS);
 }
 
@@ -31,7 +24,7 @@ void	mini_free(t_shell *sh)
 
 void	clear_command(t_command **head)
 {
-	t_command *cur;
+	t_command	*cur;
 
 	if (!(head && *head))
 		return ;
