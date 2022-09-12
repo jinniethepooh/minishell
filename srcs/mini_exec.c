@@ -8,6 +8,10 @@ int mini_exec(t_shell *sh)
 	t_command	*cmd;
 	t_pipex		px;
 
+	sh->exit_status = map_args_to_heredoc(sh->command);
+	if (sh->exit_status != EXIT_SUCCESS
+		|| get_num_cmd(sh) == 0)
+		return (sh->exit_status);
 	cmd = sh->command;
 	if (get_num_cmd(sh) == 1)
 	{
@@ -20,7 +24,8 @@ int mini_exec(t_shell *sh)
 			return (call_builtin(cmd));
 	}
 	px = setup_pipe(get_num_cmd(sh) - 1);
-	return (fork_proc(cmd, px, 0));
+	sh->exit_status = fork_proc(cmd, px, 0);
+	return (sh->exit_status);
 }
 
 static int	fork_proc(t_command *cmd, t_pipex px, int idx)

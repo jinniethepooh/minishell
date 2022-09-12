@@ -15,11 +15,7 @@ int	main(int argc, char **argv, char **env)
 		if (is_input_valid(&g_var))
 		{
 			get_cmd();
-			g_var.exit_status = map_args_to_heredoc(g_var.command);
-			if (g_var.exit_status != EXIT_SUCCESS || \
-				!ft_strcmp(g_var.from_rl, "\0"))
-				continue ;
-			g_var.exit_status = mini_exec(&g_var);
+			mini_exec(&g_var);
 		}
 		free(g_var.prompt);
 		free(g_var.from_rl);
