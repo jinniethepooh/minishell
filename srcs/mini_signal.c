@@ -9,27 +9,6 @@ static void	echo_off(void)
 	tcsetattr(STDIN_FILENO, TCSANOW, &tio);
 }
 
-int	signal_exit_child(int signum)
-{
-	if (signum == SIGINT)
-		return (EXIT_SIGINT);
-	return (EXIT_SIGQUIT);
-}
-
-void	signal_settings_child(int mode)
-{
-	if (mode == 0)
-	{
-		signal(SIGINT, SIG_IGN);
-		signal(SIGQUIT, SIG_IGN);
-	}
-	if (mode == 1)
-	{
-		signal(SIGINT, SIG_DFL);
-		//signal(SIGQUIT, SIG_DFL);
-	}
-}
-
 static void	respond_sig(int signum, siginfo_t *info, void *context)
 {
 	(void) context;
@@ -43,10 +22,10 @@ static void	respond_sig(int signum, siginfo_t *info, void *context)
 	}
 	else if (signum == SIGQUIT)
 	{
-		return ;
-		// rl_on_new_line();
-		// rl_replace_line("", 0);
-		// rl_redisplay();
+		//return ;
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
 }
 
@@ -63,4 +42,30 @@ void	signal_settings(void)
 	sigaction(SIGINT, &sact, NULL);
 	sigaction(SIGQUIT, &sact, NULL);
 	echo_off();
+}
+
+void	signal_settings_child(int mode)
+{
+	struct sigaction	sact;
+
+	if (mode == 0)
+	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
+	}
+	if (mode == 1)
+	{
+		signal(SIGINT, SIG_DFL);
+		sigemptyset(&sact.sa_mask);
+		sact.sa_flags = SA_SIGINFO;
+		sact.sa_sigaction = respond_sig;
+		sigaction(SIGQUIT, &sact, NULL);
+	}
+}
+
+int	signal_exit_child(int signum)
+{
+	if (signum == SIGINT)
+		return (EXIT_SIGINT);
+	return (EXIT_SIGQUIT);
 }
