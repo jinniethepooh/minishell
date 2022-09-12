@@ -43,9 +43,10 @@ static void	respond_sig(int signum, siginfo_t *info, void *context)
 	}
 	else if (signum == SIGQUIT)
 	{
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		return ;
+		// rl_on_new_line();
+		// rl_replace_line("", 0);
+		// rl_redisplay();
 	}
 }
 
