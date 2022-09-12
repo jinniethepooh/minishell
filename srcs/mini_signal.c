@@ -26,7 +26,7 @@ void	signal_settings_child(int mode)
 	if (mode == 1)
 	{
 		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
+		//signal(SIGQUIT, SIG_DFL);
 	}
 }
 
