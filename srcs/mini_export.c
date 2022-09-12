@@ -2,33 +2,37 @@
 
 static void	mini_export_setenv(char *name);
 static int	is_export_bef(char *name);
+static void	export_loop_checker(char ***args);
 
 char	**map_args_to_export(char ***args)
 {
-	char	*name;
-	char	*val;
+	// char	*name;
+	// char	*val;
 	int		i;
 
 	if (!(args && *args))
 		return (0);
 	i = -1;
 	while ((*args)[++i])
+	{
 		if (is_envname_valid((*args)[i]) != 1)
 		{
 			while (--i >= 0)
 				rm_from_2d(args, i);
 			return (*args);
 		}
-	while (**args)
-	{
-		name = ft_strdup(**args);
-		*ft_strchr(name, '=') = 0;
-		val = ft_strdup(ft_strchr(**args, '=') + 1);
-		rm_from_2d(args, 0);
-		exp_stack_push(&g_var.export, exp_stack_new(name, val));
-		if (mini_getenv(name) || is_export_bef(name))
-			mini_export_setenv(name);
 	}
+	export_loop_checker(args);
+	// while (**args)
+	// {
+	// 	name = ft_strdup(**args);
+	// 	*ft_strchr(name, '=') = 0;
+	// 	val = ft_strdup(ft_strchr(**args, '=') + 1);
+	// 	rm_from_2d(args, 0);
+	// 	exp_stack_push(&g_var.export, exp_stack_new(name, val));
+	// 	if (mini_getenv(name) || is_export_bef(name))
+	// 		mini_export_setenv(name);
+	// }
 	return (*args);
 }
 
@@ -85,4 +89,21 @@ static int	is_export_bef(char *name)
 		exp = exp->prev;
 	}
 	return (0);
+}
+
+static void	export_loop_checker(char ***args)
+{
+	char	*name;
+	char	*val;
+
+	while (**args)
+	{
+		name = ft_strdup(**args);
+		*ft_strchr(name, '=') = 0;
+		val = ft_strdup(ft_strchr(**args, '=') + 1);
+		rm_from_2d(args, 0);
+		exp_stack_push(&g_var.export, exp_stack_new(name, val));
+		if (mini_getenv(name) || is_export_bef(name))
+			mini_export_setenv(name);
+	}
 }
