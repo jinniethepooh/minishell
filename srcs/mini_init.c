@@ -41,15 +41,6 @@ void	set_prompt(t_shell *sh)
 	temp = mini_getenv("HOME");
 	if (temp)
 		cwd = get_prompt_dir(cwd, temp);
-	// {
-		// if (ft_strncmp(cwd + 1, temp, ft_strlen(temp)) == 0)
-		// {
-		// 	temp = ft_strjoin(":~", ft_strnstr(cwd + 1, temp,
-		// 		ft_strlen(cwd + 1)) + ft_strlen(temp));
-		// 	free(cwd);
-		// 	cwd = temp;
-		// }
-	// }
 	cwd_color = set_str_color(cwd, 1, YEL);
 	free(cwd);
 	temp = ft_strjoin(sh->usr, cwd_color);

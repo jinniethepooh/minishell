@@ -12,7 +12,9 @@ static char	*cmd_var_gen(char *src)
 	tmp = ft_substr(src + 1, 0, i);
 	dst = mini_getenv(tmp);
 	free (tmp);
-	return (dst);
+	if (dst)
+		return (ft_strdup(dst));
+	return (NULL);
 }
 
 static char	*cmd_cleaner_var(char *src)
@@ -43,6 +45,7 @@ static void	*cmd_cleaner_loop(char *src, int flag)
 {
 	char	*dst;
 	char	*tmp;
+	char	*tmp2;
 	int		i;
 
 	dst = NULL;
@@ -50,16 +53,16 @@ static void	*cmd_cleaner_loop(char *src, int flag)
 	while (src[i])
 	{
 		if (ft_isquotes(src[i]) && flag)
-			dst = ft_strjoin(dst, cmd_cleaner_quotes(src + i));
+			tmp = cmd_cleaner_quotes(src + i);
 		else if (src[i] == '$' && (get_var_skip(src[i + 1]) || \
 			src[i + 1] == '?'))
-			dst = ft_strjoin(dst, cmd_cleaner_var(src + i));
+			tmp = cmd_cleaner_var(src + i);
 		else
-		{
 			tmp = ft_substr(src + i, 0, get_cmd_move(src + i, flag));
-			dst = ft_strjoin(dst, tmp);
-			free(tmp);
-		}
+		tmp2 = dst;
+		dst = ft_strjoin(dst, tmp);
+		free(tmp);
+		free(tmp2);
 		i += get_cmd_move(src + i, flag);
 	}
 	return (dst);
