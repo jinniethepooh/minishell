@@ -5,10 +5,10 @@
 void	get_cmd(void);
 
 /* mini_lexer_split_1.c - pipe split */
-char	**pipe_split(char const *s, char c);
+char	**pipe_split(char *cpy, char c);
 
 /* mini_lexer_split_2.c - split command */
-char	**cmd_split(char const *s, char c);
+char	**cmd_split(char *cpy, char c);
 
 /* mini_cleaner.c - main cleaner */
 char	**cmd_cleaner(char **arr);

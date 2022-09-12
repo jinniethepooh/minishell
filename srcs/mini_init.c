@@ -36,6 +36,8 @@ void	set_prompt(t_shell *sh)
 	char	*cwd;
 
 	cwd = malloc(257 * sizeof(*cwd));
+	if (!cwd)
+		exit(EXIT_FAILURE);
 	*cwd = ':';
 	getcwd(cwd + 1, 256);
 	temp = mini_getenv("HOME");
@@ -44,9 +46,11 @@ void	set_prompt(t_shell *sh)
 	cwd_color = set_str_color(cwd, 1, YEL);
 	free(cwd);
 	temp = ft_strjoin(sh->usr, cwd_color);
-	free(cwd_color);
+	if (cwd_color)
+		free(cwd_color);
 	sh->prompt = ft_strjoin(temp, "$ ");
-	free(temp);
+	if (temp)
+		free(temp);
 	signal_settings();
 }
 
@@ -64,10 +68,13 @@ static char	*set_str_color(char *src, int start, char *color)
 
 	temp = ft_strjoin(color, src + start);
 	color_str = ft_strjoin(temp, RES);
-	free(temp);
+	if (temp)
+		free(temp);
 	temp = ft_substr(src, 0, start);
 	result = ft_strjoin(temp, color_str);
-	free(temp);
-	free(color_str);
+	if (temp)
+		free(temp);
+	if (color_str)
+		free(color_str);
 	return (result);
 }

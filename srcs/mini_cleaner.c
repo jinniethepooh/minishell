@@ -75,6 +75,8 @@ char	**cmd_cleaner(char **arr)
 
 	i = 0;
 	clean = (char **)malloc((size_2d(arr) + 1) * sizeof(char *));
+	if (!clean)
+		return (NULL);
 	while (arr[i])
 	{
 		clean[i] = cmd_cleaner_loop(arr[i], 1);

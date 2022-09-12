@@ -1,6 +1,12 @@
 #include "minishell.h"
 
-static int	ft_piece_loop(const char *s, char c)
+static char	**malloc_err_handler(char **arr)
+{
+	free_2d(arr);
+	return (NULL);
+}
+
+static int	ft_piece_loop(char *s, char c)
 {
 	int	i;
 
@@ -33,7 +39,7 @@ static int	ft_piece(char *s, char c)
 	return (piece);
 }
 
-static char	*ft_strdup_untilc(const char *s, char c)
+static char	*ft_strdup_untilc(char *s, char c)
 {
 	char	*str;
 	int		i;
@@ -42,6 +48,8 @@ static char	*ft_strdup_untilc(const char *s, char c)
 	i = 0;
 	len = ft_piece_loop(s, c) + 1;
 	str = (char *)malloc(len * sizeof(char));
+	if (!str)
+		return (NULL);
 	while (s[i] && i < len - 1)
 	{
 		str[i] = s[i];
@@ -51,28 +59,29 @@ static char	*ft_strdup_untilc(const char *s, char c)
 	return (str);
 }
 
-char	**pipe_split(char const *s, char c)
+char	**pipe_split(char *cpy, char c)
 {
 	int		i;
 	int		j;
-	char	*cpy;
 	char	**arr;
 
 	i = 0;
-	cpy = ft_strdup(s);
 	arr = malloc((ft_piece(cpy, c) + 1) * sizeof(char *));
+	if (!arr)
+		return (NULL);
 	j = ft_loop_until(cpy, c, 1);
 	while (cpy[j])
 	{
 		if (cpy[j] != c)
 		{
 			arr[i++] = ft_strdup_untilc(&cpy[j], c);
+			if (!arr[i - 1])
+				return (malloc_err_handler(arr));
 			j += ft_piece_loop(&cpy[j], c);
 		}
 		else
 			j += ft_loop_until(&cpy[j], c, 1);
 	}
 	arr[i] = 0;
-	free(cpy);
 	return (arr);
 }
