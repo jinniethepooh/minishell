@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_exec_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: prrattan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cchetana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 12:05:38 by prrattan          #+#    #+#             */
-/*   Updated: 2022/09/13 12:05:39 by prrattan         ###   ########.fr       */
+/*   Updated: 2022/09/13 20:32:28 by cchetana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ void	exec_pipe(t_command *c)
 			exit(127);
 		}
 		if (execve(c->cmd_path, c->cmd_args, g_var.env) < 0)
+		{
 			perror(c->cmd_args[0]);
+			exit(EXIT_FAILURE);
+		}
 	}
 	else
 		exit(call_builtin(c));

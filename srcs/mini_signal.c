@@ -6,7 +6,7 @@
 /*   By: cchetana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 19:50:48 by cchetana          #+#    #+#             */
-/*   Updated: 2022/09/13 19:50:49 by cchetana         ###   ########.fr       */
+/*   Updated: 2022/09/13 20:24:24 by cchetana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static void	respond_sig(int signum, siginfo_t *info, void *context)
 	else if (signum == SIGQUIT)
 	{
 		rl_on_new_line();
-		rl_replace_line("", 0);
 		rl_redisplay();
 	}
 }
