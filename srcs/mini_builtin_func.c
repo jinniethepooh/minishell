@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_builtin_func.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: prrattan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cchetana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 11:56:59 by prrattan          #+#    #+#             */
-/*   Updated: 2022/09/13 11:56:59 by prrattan         ###   ########.fr       */
+/*   Updated: 2022/09/13 22:01:29 by cchetana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	builtin_echo(char **args)
 {
 	if (args[1])
 	{
-		if (ft_strncmp(args[1], "-n", 2) == 0)
+		// if (ft_strncmp(args[1], "-n", 2) == 0)
+		if (ft_strcmp(args[1], "-n") == 0)
 			print_2d(args + 2, ' ');
 		else
 		{
