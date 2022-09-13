@@ -25,18 +25,6 @@ int	ft_loop_until(const char *s, char c, int flag)
 	return (len);
 }
 
-int	redir_checker(char *str)
-{
-	if (!*str)
-		put_error(NULL, "newline", 2);
-	else
-	{
-		*(str + 1) = 0;
-		put_error(NULL, str, 2);
-	}
-	return (0);
-}
-
 void	put_error(char *title, char *token, int status)
 {
 	g_var.exit_status = status;
