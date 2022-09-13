@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mini_signal.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cchetana <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/13 19:50:48 by cchetana          #+#    #+#             */
+/*   Updated: 2022/09/13 19:50:49 by cchetana         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static void	echo_off(void)
@@ -22,7 +34,6 @@ static void	respond_sig(int signum, siginfo_t *info, void *context)
 	}
 	else if (signum == SIGQUIT)
 	{
-		//return ;
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();

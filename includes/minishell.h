@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: prrattan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cchetana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 12:01:18 by prrattan          #+#    #+#             */
-/*   Updated: 2022/09/13 12:01:19 by prrattan         ###   ########.fr       */
+/*   Updated: 2022/09/13 19:45:55 by cchetana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-# include "colour.h"
 # include "libft.h"
+# include "mini_colour.h"
 # include "mini_signal.h"
 # include "mini_lexer.h"
 

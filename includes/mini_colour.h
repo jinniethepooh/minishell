@@ -1,5 +1,17 @@
-#ifndef COLOUR_H
-# define COLOUR_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mini_colour.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cchetana <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/13 19:46:57 by cchetana          #+#    #+#             */
+/*   Updated: 2022/09/13 19:46:58 by cchetana         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef MINI_COLOUR_H
+# define MINI_COLOUR_H
 
 //Regular text
 # define BLK "\e[0;30m"
@@ -41,7 +53,7 @@
 # define CYNB "\e[46m"
 # define WHTB "\e[47m"
 
-//High intensty background 
+//High intensty background
 # define BLKHB "\e[0;100m"
 # define REDHB "\e[0;101m"
 # define GRNHB "\e[0;102m"

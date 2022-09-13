@@ -1,37 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mini_input_checker.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cchetana <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/13 19:48:52 by cchetana          #+#    #+#             */
+/*   Updated: 2022/09/13 19:48:53 by cchetana         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
-
-/*static int	quotes_checker(char *from_rl)
-{
-	int	i;
-	int	curr_q;
-
-	i = 0;
-	curr_q = 0;
-	while (from_rl[i] && !ft_isquotes(from_rl[i]))
-		++i;
-	while (from_rl[i])
-	{
-		if (ft_isquotes(from_rl[i]))
-		{
-			curr_q = from_rl[i++];
-			i += pos_in_str(from_rl + i, curr_q);
-		}
-		if (from_rl[i++] == curr_q)
-			curr_q = 0;
-	}
-	return (curr_q);
-}
-
-static int	is_quote_valid(t_shell *sh)
-{
-	if (quotes_checker(sh->from_rl))
-	{
-		ft_putstr_fd("tinyshell: "RED"invaid quotes\n"RES, STDERR_FILENO);
-		sh->exit_status = EXIT_FAILURE;
-		return (0);
-	}
-	return (1);
-}*/
 
 static int	is_quote_valid(t_shell *sh)
 {
