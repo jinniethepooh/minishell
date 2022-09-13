@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mini_export_utils.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: prrattan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/13 12:00:14 by prrattan          #+#    #+#             */
+/*   Updated: 2022/09/13 12:00:22 by prrattan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 t_export	*exp_stack_new(char *name, char *val)
@@ -5,7 +17,6 @@ t_export	*exp_stack_new(char *name, char *val)
 	t_export	*node;
 
 	node = malloc(sizeof(*node));
-	//node->status = 1;
 	node->name = name;
 	node->val = val;
 	node->prev = NULL;

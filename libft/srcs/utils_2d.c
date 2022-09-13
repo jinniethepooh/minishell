@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_2d.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: prrattan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/13 11:35:50 by prrattan          #+#    #+#             */
+/*   Updated: 2022/09/13 11:35:52 by prrattan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft_v2.h"
 
 int	size_2d(char **arr)
@@ -57,70 +69,4 @@ char	**dup_2d(char **src_arr)
 	}
 	new_arr[i] = 0;
 	return (new_arr);
-}
-
-char	**add_to_2d(char ***old_arr, char *mem, int idx)
-{
-	char	**new_arr;
-	int		i;
-	int		j;
-
-	if (!*old_arr)
-		return (0);
-	if (idx >= size_2d(*old_arr))
-		idx = size_2d(*old_arr);
-	new_arr = malloc((size_2d(*old_arr) + 2) * sizeof(*new_arr));
-	i = 0;
-	j = 0;
-	while ((*old_arr)[i])
-	{
-		if (i == idx)
-			j++;
-		new_arr[j++] = ft_strdup((*old_arr)[i++]);
-	}
-	new_arr[idx] = mem;
-	new_arr[i + 1] = 0;
-	free_2d(*old_arr);
-	*old_arr = new_arr;
-	return (*old_arr);
-}
-
-char	**rm_from_2d(char ***old_arr, int idx)
-{
-	char	**new_arr;
-	int		i;
-	int		j;
-
-	if (!*old_arr)
-		return (0);
-	if (idx >= size_2d(*old_arr))
-		return (*old_arr);
-	new_arr = malloc(size_2d(*old_arr) * sizeof(*new_arr));
-	i = 0;
-	j = 0;
-	while ((*old_arr)[i])
-	{
-		if (i != idx)
-			new_arr[j++] = ft_strdup((*old_arr)[i]);
-		i++;
-	}
-	new_arr[j] = 0;
-	free_2d(*old_arr);
-	*old_arr = new_arr;
-	return (*old_arr);
-}
-
-char	**map_2d(char ***arr, void (*f)(char **))
-{
-	int	i;
-
-	if (!*arr)
-		return (0);
-	i = 0;
-	while ((*arr)[i])
-	{
-		(*f)((*arr) + i);
-		i++;
-	}
-	return (*arr);
 }

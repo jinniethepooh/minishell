@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mini_exec.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: prrattan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/13 11:58:53 by prrattan          #+#    #+#             */
+/*   Updated: 2022/09/13 11:58:54 by prrattan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static int	fork_proc(t_command *cmd, t_pipex px, int idx);
 static void	child_proc(t_command *cmd, t_pipex px, int idx);
 
-int mini_exec(t_shell *sh)
+int	mini_exec(t_shell *sh)
 {
 	t_command	*cmd;
 	t_pipex		px;
