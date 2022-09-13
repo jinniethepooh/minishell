@@ -41,7 +41,7 @@ void	exec_pipe(t_command *c)
 		if (execve(c->cmd_path, c->cmd_args, g_var.env) < 0)
 		{
 			perror(c->cmd_args[0]);
-			exit(EXIT_FAILURE);
+			exit(126);
 		}
 	}
 	else

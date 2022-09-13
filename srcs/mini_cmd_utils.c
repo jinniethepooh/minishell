@@ -51,7 +51,7 @@ static char	*get_access_cmd(char **cmd_args, char **env_paths)
 	char	*temp;
 	int		i;
 
-	if (!(cmd_args && env_paths))
+	if (!(cmd_args && env_paths) || ft_strlen(cmd_args[0]) == 0)
 		return (0);
 	if (access(cmd_args[0], F_OK) == 0)
 		return (ft_strdup(cmd_args[0]));
