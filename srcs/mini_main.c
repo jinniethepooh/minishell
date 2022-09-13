@@ -27,7 +27,7 @@ int	main(int argc, char **argv, char **env)
 		if (is_input_valid(&g_var))
 		{
 			get_cmd();
-			mini_exec(&g_var);
+			g_var.exit_status = mini_exec(&g_var);
 		}
 		free(g_var.prompt);
 		free(g_var.from_rl);

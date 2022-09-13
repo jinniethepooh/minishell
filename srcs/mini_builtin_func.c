@@ -16,9 +16,11 @@ int	builtin_echo(char **args)
 {
 	if (args[1])
 	{
-		// if (ft_strncmp(args[1], "-n", 2) == 0)
-		if (ft_strcmp(args[1], "-n") == 0)
-			print_2d(args + 2, ' ');
+		if ((size_t)count_in_str(args[1], 'n') == ft_strlen(args[1] + 1))
+		{
+			if (ft_strncmp(args[1], "-n", 2) == 0)
+				print_2d(args + 2, ' ');
+		}
 		else
 		{
 			print_2d(args + 1, ' ');
@@ -41,7 +43,7 @@ int	builtin_cd(char **args)
 		target = mini_getenv("HOME");
 	if (chdir(target) < 0)
 	{
-		if (mini_getenv("HOME"))
+		if (target)
 			perror("cd");
 		else
 			ft_putstr_fd("cd: HOME not set\n", STDERR_FILENO);
