@@ -16,11 +16,9 @@ int	builtin_echo(char **args)
 {
 	if (args[1])
 	{
-		if ((size_t)count_in_str(args[1], 'n') == ft_strlen(args[1] + 1))
-		{
-			if (ft_strncmp(args[1], "-n", 2) == 0)
-				print_2d(args + 2, ' ');
-		}
+		if ((size_t)count_in_str(args[1], 'n') == ft_strlen(args[1] + 1)
+			&& ft_strncmp(args[1], "-n", 2) == 0)
+			print_2d(args + 2, ' ');
 		else
 		{
 			print_2d(args + 1, ' ');
